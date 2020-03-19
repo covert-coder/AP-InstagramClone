@@ -16,10 +16,10 @@ import com.parse.SaveCallback;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText mName, mStrength,mSpeed, mStamina;
+    private EditText mName, mStrength, mSpeed, mStamina;
     private Button mBtnSave;
 
-//public void hellowWorldTap(View view){
+    //public void hellowWorldTap(View view){
 //ParseObject boxer = new ParseObject("Boxer");
 //boxer.put("punch_speed", 200);
 //boxer.saveInBackground(new SaveCallback() {
@@ -66,31 +66,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mStamina = findViewById(R.id.txtStamina);
         mStrength = findViewById(R.id.txtStrength);
         mName = findViewById(R.id.txtName);
-        mBtnSave=findViewById(R.id.button);
+        mBtnSave = findViewById(R.id.button);
         mBtnSave.setOnClickListener(MainActivity.this);
     }
+
     @Override
     public void onClick(View v) {
-        ParseObject kickBoxer = new ParseObject("kickBoxer");
-        Log.i("myTag; ",""+mSpeed.getText().toString() +" "+mStamina.getText().toString()
-                +" "+mStrength.getText().toString()+" "+mName.getText().toString());
-        kickBoxer.put("stamina", Integer.parseInt(mStamina.getText().toString()));
-        kickBoxer.put("name", mName.getText().toString());
-        kickBoxer.put("strength", Integer.parseInt(mStrength.getText().toString()));
-        kickBoxer.put("speed",Integer.parseInt(mSpeed.getText().toString()));
+        try {
 
-        kickBoxer.saveInBackground(new SaveCallback() {
-            @Override
-        public void done(ParseException e) {
-            if(e == null){
-                Toast.makeText(MainActivity.this,"Your kickboxer stats were successfully saved",
-                        Toast.LENGTH_LONG).show();
-            }
-            else{
-                Toast.makeText(MainActivity.this,"Your save is incomplete, Try again "+ e,
-                        Toast.LENGTH_LONG).show();
-            }
+            ParseObject kickBoxer = new ParseObject("kickBoxer");
+            Log.i("myTag; ", "" + mSpeed.getText().toString() + " " + mStamina.getText().toString()
+                    + " " + mStrength.getText().toString() + " " + mName.getText().toString());
+            kickBoxer.put("stamina", Integer.parseInt(mStamina.getText().toString()));
+            kickBoxer.put("name", mName.getText());
+            kickBoxer.put("strength", Integer.parseInt(mStrength.getText().toString()));
+            kickBoxer.put("speed", Integer.parseInt(mSpeed.getText().toString()));
+
+            kickBoxer.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Toast.makeText(MainActivity.this, "Your kickboxer stats were successfully saved",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Your save is incomplete, Try again " + e,
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(MainActivity.this, "Your input format is incorrect. " +
+                            "If an integer is expected, then enter an integer.  If a word is expected, " +
+                            "enter the word. Try again " + e,
+                    Toast.LENGTH_LONG).show();
         }
-    });
+
     }
 }
