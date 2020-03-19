@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.i("myTag; ", "" + mSpeed.getText().toString() + " " + mStamina.getText().toString()
                     + " " + mStrength.getText().toString() + " " + mName.getText().toString());
             kickBoxer.put("stamina", Integer.parseInt(mStamina.getText().toString()));
-            kickBoxer.put("name", mName.getText());
+            kickBoxer.put("name", mName.getText().toString());
             kickBoxer.put("strength", Integer.parseInt(mStrength.getText().toString()));
             kickBoxer.put("speed", Integer.parseInt(mSpeed.getText().toString()));
 
@@ -96,8 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "Your input format is incorrect. " +
-                            "If an integer is expected, then enter an integer.  If a word is expected, " +
-                            "enter the word. Try again " + e,
+                            "If an integer is expected, then enter an integer. Try again " + e,
                     Toast.LENGTH_LONG).show();
         }
 
