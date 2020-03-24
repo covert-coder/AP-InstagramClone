@@ -2,6 +2,7 @@ package com.example.ap_instagramclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +28,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mTxtGetData;
     private ParseObject mKickBoxer;
     private Button mRetrieveAll;
-    private String mAllKickBoxers;
+    private String mAllKickBoxersName;
+    private String mAllKickBoxersStrength;
+    private String mAllKickBoxersStamina;
+    private String mAllKickBoxersSpeed;
+    private TextView txtKickBoxerStats;
+    private String myTotalArray;
+    private Button LogInbtn;
+
 
     //public void hellowWorldTap(View view){
 //ParseObject boxer = new ParseObject("Boxer");
@@ -80,7 +88,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnSave.setOnClickListener(MainActivity.this);
         mTxtGetData= findViewById(R.id.txtRetrieveData);
         mRetrieveAll = findViewById(R.id.btnRetrieveAllData);
-        mAllKickBoxers = "";
+        mAllKickBoxersName = "";
+        mAllKickBoxersSpeed="";
+        mAllKickBoxersStamina="";
+        mAllKickBoxersStrength="";
+        txtKickBoxerStats = findViewById(R.id.txtKickBoxerStats);
+        myTotalArray ="";
+        LogInbtn = findViewById(R.id.btnLoginSignUp);
 
         mKickBoxer = new ParseObject("kickBoxer");
 
@@ -99,7 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
             }
-        });mRetrieveAll.setOnClickListener(new View.OnClickListener() {
+        });
+        // a better method for getting all entries on the parse server, queryAll
+        mRetrieveAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ParseQuery<ParseObject> queryAll = ParseQuery.getQuery("kickBoxer");
@@ -107,15 +123,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void done(List<ParseObject> objects, ParseException e) {
                         if (objects.size()>0 && e==null){
-
+                            String[] allKickBoxArray = new String[4];
                             for(ParseObject KickBoxerParsed: objects){
-                                mAllKickBoxers = mAllKickBoxers + KickBoxerParsed.get("name").toString()+"\n";
+                                mAllKickBoxersName = KickBoxerParsed.get("name").toString();
+                                mAllKickBoxersStrength = KickBoxerParsed.get("strength").toString();
+                                mAllKickBoxersSpeed = KickBoxerParsed.get("speed").toString();
+                                mAllKickBoxersStamina = KickBoxerParsed.get("stamina").toString();
+                                allKickBoxArray[0] = "name =  "+ mAllKickBoxersName;
+                                allKickBoxArray[1]= "speed =  "+mAllKickBoxersSpeed;
+                                allKickBoxArray[2]="stamina = " +mAllKickBoxersStamina;
+                                allKickBoxArray[3]="strength = "+mAllKickBoxersStrength;
+
+                                for (String myArray: allKickBoxArray) {
+                                    myTotalArray+=myArray+", ";
+                                }
                             }
                             // when the query process above is completed then, inside this done message
                             // we can use the for loop code to extract the info and store it in mAllKickBoxers
                             // rather than a single object, this gets all of the data objects from kickBoxer class
-                            Toast.makeText(MainActivity.this, "the contents of objects is;  "+"\n" +mAllKickBoxers,
+                            Toast.makeText(MainActivity.this, "the contents of objects is;  "+"\n" +mAllKickBoxersName,
                                     Toast.LENGTH_LONG).show();
+                            txtKickBoxerStats.setText(myTotalArray.toString());
                             // our output to the user is in the form of a toast message listing the
                             // names of our parse server data entries.
                         }else{
@@ -125,6 +153,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+            }
+        });
+        LogInbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Login = new Intent(MainActivity.this, SignUp.class);
+                // where; SignUp.class is the java class (file) created for the new activity.
+                startActivity(Login);
             }
         });
     }
