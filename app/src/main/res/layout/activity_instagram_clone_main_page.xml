@@ -41,7 +41,7 @@
         android:background="#5D66CA"
         android:shadowDy="0"
         android:shadowRadius="15"
-        android:text="SignUp"
+        android:text=" Signup New"
         android:textColor="#FFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -70,18 +70,20 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
             }
         });
     }
-
+    // onClick implemented by main class
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
+            // the login button is pressed sending user to the login screen
             case R.id.btnLoginInstagram:
                 Log.i("myTag", "login button was pushed");
                 Intent intentLogin = new Intent(InstagramCloneMainPage.this,
                         InstagramCloneLoginPage.class);
                 startActivity(intentLogin);
                 break;
-
+            // signup button is pressed, sending data to the parse server
+            // and generating a progress dialog
+            // plus error checking
             case R.id.btnSignupInstagram:
                 final ParseUser appUser = new ParseUser();
                 appUser.setUsername(mUserNameInstag.getText().toString());
@@ -99,8 +101,9 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                         || mPasswordInstag.getText().toString().equals("")) {
                     Toast.makeText(InstagramCloneMainPage.this, "email address, password, " +
                             "and username must be provided", Toast.LENGTH_LONG).show();
-                    signUpDialog.dismiss();
+                    signUpDialog.dismiss(); // signup is not occurring so..
                 }
+                // but.., if all fields have been filled, then
                 else{
                         appUser.signUpInBackground(new SignUpCallback() {
                             @Override
@@ -109,21 +112,18 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                                     Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
                                             "set successfully;", Toast.LENGTH_LONG).show();
 
+                                    // possibility of server error since e is not null
                                 } else {
                                     Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
                                             "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
-
-
                                 }
-                                signUpDialog.dismiss();
                             }
                         });
-                        break;
-
+                        break; // break from case R.id.btnSignupInstag
                     }
-                }
-        }
-    }
+                } // end of switch stmt
+        } // end of implemented onClick containing switch stmts
+    } // end of main class
 
 
 
