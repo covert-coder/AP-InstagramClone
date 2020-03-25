@@ -33,8 +33,9 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
 
         // logout any user that is logged in
         if (ParseUser.getCurrentUser() != null) {
-            ParseUser.getCurrentUser().logOut();
-            Log.i("myTag", "current user was logged out");
+           // ParseUser.getCurrentUser().logOut();
+            transitionToSocialMediaActivity();
+            Log.i("myTag", "current user was transitioned to the media page");
         }
         // assign edit texts to variables
         mUserNameInstag = findViewById(R.id.txtUserInstagram);
@@ -112,7 +113,7 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                                     signUpDialog.dismiss();
                                     // possibility of server error since e is not null
                                     Log.i("myTag", "sign up included all fields and dialog was dismissed");
-
+                                    transitionToSocialMediaActivity();
                                 } else {
                                     Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
                                             "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -127,21 +128,26 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                 } // end of switch stmt
         } // end of implemented onClick containing switch stmts
 
-        // the method below is an onClickListener for the constraint layout of the main activity page
-        // clicking anywhere on the page (other than established UI's) triggers the method
-        public void rootLayoutTapped(View layoutView) {
-            // encapsulate in a try / catch to catch the error generated when the user taps the screen and the
-            // keyboard is not displayed.  This causes a crash without this code.
-            try {
-                // access the inputmethodmanager
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                // use the manager to hide the current focus (the keyboard) by getting its token
-                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-            } catch (Exception e) {
-                e.printStackTrace(); // sends some info to the stack regarding the error generated instead of causing a crash
-            }
+    // the method below is an onClickListener for the constraint layout of the main activity page
+    // clicking anywhere on the page (other than established UI's) triggers the method
+    public void rootLayoutTapped(View layoutView) {
+        // encapsulate in a try / catch to catch the error generated when the user taps the screen and the
+        // keyboard is not displayed.  This causes a crash without this code.
+        try {
+            // access the inputmethodmanager
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            // use the manager to hide the current focus (the keyboard) by getting its token
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace(); // sends some info to the stack regarding the error generated instead of causing a crash
         }
-    } // end of main class
+    }
+    // this method, takes us to the social media page when signup is complete
+    private void transitionToSocialMediaActivity(){
+            Intent intentSocialActivity = new Intent(InstagramCloneMainPage.this, SocialMediaActivity.class);
+            startActivity(intentSocialActivity);
+    }
+} // end of main class
 
 
 

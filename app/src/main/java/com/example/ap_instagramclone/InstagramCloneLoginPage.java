@@ -42,7 +42,7 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
                                 if(user!=null && e==null){
                                     Toast.makeText(InstagramCloneLoginPage.this, "your login was successful "+user.get("username")
                                             , Toast.LENGTH_LONG).show();
-
+                                transitionToSocialMediaActivity();
                                 }else{
                                     Toast.makeText(InstagramCloneLoginPage.this, "your login failed: "+ e.getMessage(),
                                             Toast.LENGTH_LONG).show();
@@ -75,5 +75,10 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
+    // this method, takes us to the social media page when signup is complete
+    private void transitionToSocialMediaActivity(){
+        Intent intentSocialActivity = new Intent(InstagramCloneLoginPage.this, SocialMediaActivity.class);
+        startActivity(intentSocialActivity);
     }
 }
