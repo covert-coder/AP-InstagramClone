@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -46,6 +47,8 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         mSignUpBtn.setOnClickListener(this);
         mLoginBtn.setOnClickListener(this);
 
+
+
         // allowing the user to enter their data using the enter key by setting an
         // onKeyListener that looks for the enter key click and press down
         // set to the password field because it is the last one filled by the user (last in sequence on screen)
@@ -60,15 +63,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                 return false;
             }
         });
-
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-        ParseObject mInstagram = new ParseObject("InstagramClone");
-        mInstagram.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                Log.i("myTag", "the new class InstagramClone, was created");
-            }
-        });
     }
     // onClick implemented by main class
     @Override
@@ -76,7 +70,7 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         switch (view.getId()) {
             // the login button is pressed sending user to the login screen
             case R.id.btnLoginInstagram:
-                Log.i("myTag", "login button was pushed");
+                Log.i("myTag", "login button was pushed sending user to login screen");
                 Intent intentLogin = new Intent(InstagramCloneMainPage.this,
                         InstagramCloneLoginPage.class);
                 startActivity(intentLogin);
@@ -85,6 +79,9 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
             // and generating a progress dialog
             // plus error checking
             case R.id.btnSignupInstagram:
+
+                Log.i("myTag", "signup new button was pushed for submission of registration");
+
                 final ParseUser appUser = new ParseUser();
                 appUser.setUsername(mUserNameInstag.getText().toString());
                 appUser.setPassword(mPasswordInstag.getText().toString());
@@ -102,6 +99,7 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                     Toast.makeText(InstagramCloneMainPage.this, "email address, password, " +
                             "and username must be provided", Toast.LENGTH_LONG).show();
                     signUpDialog.dismiss(); // signup is not occurring so..
+                    Log.i("myTag", "a field was left unfilled and the dialog was dismissed");
                 }
                 // but.., if all fields have been filled, then
                 else{
@@ -111,11 +109,16 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                                 if (e == null) {
                                     Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
                                             "set successfully;", Toast.LENGTH_LONG).show();
-
+                                    signUpDialog.dismiss();
                                     // possibility of server error since e is not null
+                                    Log.i("myTag", "sign up included all fields and dialog was dismissed");
+
                                 } else {
                                     Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
                                             "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                    signUpDialog.dismiss();
+                                    Log.i("myTag", "there was a problem with parse server sign up and the dialog was dismissed");
+
                                 }
                             }
                         });
@@ -123,6 +126,21 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                     }
                 } // end of switch stmt
         } // end of implemented onClick containing switch stmts
+
+        // the method below is an onClickListener for the constraint layout of the main activity page
+        // clicking anywhere on the page (other than established UI's) triggers the method
+        public void rootLayoutTapped(View layoutView) {
+            // encapsulate in a try / catch to catch the error generated when the user taps the screen and the
+            // keyboard is not displayed.  This causes a crash without this code.
+            try {
+                // access the inputmethodmanager
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                // use the manager to hide the current focus (the keyboard) by getting its token
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            } catch (Exception e) {
+                e.printStackTrace(); // sends some info to the stack regarding the error generated instead of causing a crash
+            }
+        }
     } // end of main class
 
 

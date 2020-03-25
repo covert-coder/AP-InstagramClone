@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E289C6"
-    tools:context=".InstagramCloneLoginPage" >
+    android:onClick="rootLayoutLoginPageTapped"
+    tools:context=".InstagramCloneLoginPage">
 
     <ImageView
         android:id="@+id/imageView3"
