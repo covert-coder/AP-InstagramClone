@@ -22,6 +22,8 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instagram_clone_login_page);
 
+        setTitle("Login to Instagram");
+
         txtEmailOnfile = findViewById(R.id.txtEmailExist);
         txtPassOnfile = findViewById(R.id.txtPassExist);
 
@@ -36,8 +38,7 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
                                 if(user!=null && e==null){
                                     Toast.makeText(InstagramCloneLoginPage.this, "your login was successful "+user.get("username")
                                             , Toast.LENGTH_LONG).show();
-                                    Intent welcomeIntent = new Intent(InstagramCloneLoginPage.this, WelcomeActivity.class);
-                                    startActivity(welcomeIntent);
+
                                 }else{
                                     Toast.makeText(InstagramCloneLoginPage.this, "your login failed: "+ e.getMessage(),
                                             Toast.LENGTH_LONG).show();
