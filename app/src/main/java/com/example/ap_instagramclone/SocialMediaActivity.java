@@ -1,5 +1,4 @@
 package com.example.ap_instagramclone;
-import android.icu.text.CaseMap;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.net.Uri;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class SocialMediaActivity extends AppCompatActivity implements ProfileTab.OnFragmentInteractionListener, UsersTab.OnFragmentInteractionListener, SharePictureTab.OnFragmentInteractionListener {
     @Override
@@ -75,7 +75,6 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
@@ -87,12 +86,6 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         }
     }
 
-//    private androidx.appcompat.widget.Toolbar toolbar;
-//    private com.google.android.material.tabs.TabLayoutMediator mTabLayoutMediator;
-//    private ViewPager2 mViewPager2;
-//    private TabLayoutMediator mLayoutMediator;
-//    private TabLayout mTabLayout;
-//    private androidx.viewpager.widget.ViewPager mViewPager;
-//    private FragmentStatePagerAdapter mTabAdapter;
+
 
 
