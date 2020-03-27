@@ -9,7 +9,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 public class tabAdapter extends FragmentPagerAdapter {
 
     int tabCount;
-
+    // tabAdapter has two parameters, a fragment manager and an integer for the number of tabs
+    // by joining this class, an object inherits the Fragment manager and can access/get the # of tabs (there is no setter)
+    // and, can get the fragments (tabs) that will be scrolled (Profile, Users, Pictures)
     public tabAdapter(@NonNull FragmentManager fm, int numberOfTabs) {
         super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.tabCount = numberOfTabs; // numberOfTabs is a variable we have created that holds the
@@ -18,11 +20,12 @@ public class tabAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    // positions are 0,1,2 and correspond to the case numbers and position as tabs on the action bar
     public Fragment getItem(int position) {
-        switch (position) {
+        switch (position) { // similar to if stmt
 
-            case 0: // ranks the tab as first in line
-                return new ProfileTab(); // returns that value to the method as an integer called position for case 0
+            case 0: // ranks the tab as first in line (furthest to left on action bar)
+                return new ProfileTab(); // returns the ProfileTab fragment to the method in response to selection of tab 1
 
             case 1:
                 return new UsersTab();
