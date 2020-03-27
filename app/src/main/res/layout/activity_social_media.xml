@@ -3,32 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".SocialMediaActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-
-        android:id="@+id/appBarLayout"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-
-    <include
-        android:id="@id/mytoolbar"
-        layout="@layout/mytoolbar" />
-
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/sliding_tabs"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed"
+            app:tabGravity="fill"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <include layout="@layout/mytoolbar" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appBarLayout" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/cardview_compat_inset_shadow"
+        app:srcCompat="@android:drawable/ic_dialog_email"/>
 
 </RelativeLayout>

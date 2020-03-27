@@ -7,17 +7,22 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.net.Uri;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
+
 public class ProfileTab extends Fragment {
 
     public ProfileTab() {
         // Required empty public constructor
     }
-
+    public interface OnFragmentInteractionListener{
+        // TODO:  Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
