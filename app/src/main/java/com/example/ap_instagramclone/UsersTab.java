@@ -24,7 +24,6 @@ import java.util.Objects;
 public class UsersTab extends Fragment {
 
     private ArrayList<String> arrayList;
-
     private ListView mListView;
     private ArrayAdapter<String> mAdapter;
 
@@ -38,7 +37,6 @@ public class UsersTab extends Fragment {
         // TODO:  Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,21 +52,21 @@ public class UsersTab extends Fragment {
         arrayList = new ArrayList<>();
 
         // set the type of parse query to <ParseUser>
-        ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
+        final ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
 
         // flter out the currentUser using "where not equal to" followed by what we want to filter out
         // that exception is the user name and we get it using ParseUser.get.....
-        parseQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
+        userQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
 
         // now we create the "findInBackground method with a callback to find all objects that match the query of type ParseUser
         // less the excluded current user
-        parseQuery.findInBackground(new FindCallback<ParseUser>() {
+        userQuery.findInBackground(new FindCallback<ParseUser>() {
             @Override
-            public void done(List<ParseUser> users, ParseException e) {
+            public void done(List<ParseUser> userList, ParseException e) {
 
                 if(e==null){
-                    if(users.size()>0){
-                        for(ParseUser user: users){
+                    if(userList.size()>0){
+                        for(ParseUser user: userList){
                             // this is where we will create our array list, but we first needed to initialize and define
                             // that array in our class userTab and in the onCreateView, above
 
@@ -77,19 +75,27 @@ public class UsersTab extends Fragment {
                             mAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, arrayList);
 
                             // add a username from the parse server to the list, iteratively according to for stmt
-                            arrayList.add(user.getUsername());
+                            //arrayList.add("username","Hobbies"+"username");
+                            arrayList.add("User name:  "+ user.getUsername());
+                            arrayList.add("Hobbies;  "+ user.get("Hobbies").toString());
+                            arrayList.add("AutoBiography;  "+ user.get("Bio").toString());
+                            arrayList.add("Favourite Sports;  "+ user.get("FavouriteSports").toString());
+                            arrayList.add("Profession;  "+ user.get("Profession").toString());
+                            arrayList.add("______________________________________________");
 
                             // let the adapter know where we are in the list as iteration progresses
                             mAdapter.notifyDataSetChanged();
-
                         }
                         // set the adapter to our ListView, mListView so we can see the list on the screen(ListView)
                         mListView.setAdapter(mAdapter);
+                    }else{
+                        Toast.makeText(getContext(), "No records to show, or, data retrieval error. " +
+                                "Try again later", Toast.LENGTH_LONG).show();
                     }
+
                 }
             }
         });
         return view;
-
     }
 }
