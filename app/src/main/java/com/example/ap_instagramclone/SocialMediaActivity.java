@@ -3,18 +3,24 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.net.Uri;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
+
+import java.util.Objects;
 
 public class SocialMediaActivity extends AppCompatActivity implements ProfileTab.OnFragmentInteractionListener, UsersTab.OnFragmentInteractionListener, SharePictureTab.OnFragmentInteractionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media);
+
+//        ParseObject myFirstClass = new ParseObject("InstagramClone");
+//        myFirstClass.put("name", "I'm able to save objects!");
+//        myFirstClass.saveInBackground();
 
         setTitle("Instagram Clone Demonstration App!"); // sets the title of the action bar
 
@@ -70,7 +76,8 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
                 // getPageTitle is a method in tabAdapter and "adapter" is of tabAdapter class so the method can be accessed via
                 // adapter.  The tab position, intentionally, has the same value as position in tabAdapter so it can
                 // be substituted in that method to arrive at the desired fragment (tab) heading
-                String title = (adapter.getPageTitle(tab.getPosition())).toString();
+                String title;
+                title = (Objects.requireNonNull(adapter.getPageTitle(tab.getPosition()))).toString();
                 setTitle(title);
             }
             @Override

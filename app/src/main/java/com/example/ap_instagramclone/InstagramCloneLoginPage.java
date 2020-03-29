@@ -14,6 +14,8 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import java.util.Objects;
+
 public class InstagramCloneLoginPage extends AppCompatActivity {
 
     private EditText txtEmailOnfile;
@@ -25,6 +27,7 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_instagram_clone_login_page);
 
         setTitle("Login to Instagram");
+
 
         txtEmailOnfile = findViewById(R.id.txtEmailExist);
         txtPassOnfile = findViewById(R.id.txtPassExist);
@@ -70,7 +73,8 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
         // access the inputmethodmanager
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         // use the manager to hide the current focus (the keyboard) by getting its token
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            assert inputMethodManager != null;
+            inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
         }
         catch(Exception e){
             e.printStackTrace();

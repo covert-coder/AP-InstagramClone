@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AP-InstagramClone</string>
+    <string name="app_name">InstagramClone</string>
 
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
 
@@ -9,5 +9,18 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_name">profile name</string>
+    <string name="your_bio">your Bio</string>
+    <string name="your_profession">your profession</string>
+    <string name="your_favourite_hobbies">your favourite hobbies</string>
+    <string name="your_favourite_sports">your favourite sports</string>
+    <string name="submit_info">submit info</string>
+    <string name="all_fields_are_required">all fields are required</string>
+    <string name="please_enter_email">Please enter email</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="login">Login</string>
+    <string name="signup_new">signup new</string>
+    <string name="or">or</string>
+    <string name="instagram_logo">Instagram Logo</string>
 
 </resources>

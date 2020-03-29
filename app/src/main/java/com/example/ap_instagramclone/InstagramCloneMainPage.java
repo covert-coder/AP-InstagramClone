@@ -12,11 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import java.util.Objects;
 
 public class InstagramCloneMainPage extends AppCompatActivity implements View.OnClickListener {
     private EditText mPasswordInstag;
@@ -29,11 +28,16 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instagram_clone_main_page);
 
+        ParseUser.getCurrentUser();
+        ParseUser.logOut();
         setTitle("Sign Up for Instagram"); // sets the title in the action bar for this main page
+
+//        Toast.makeText(this, "current user name is "
+//                + ParseUser.getCurrentUser().getUsername().toString(), Toast.LENGTH_LONG).show();
 
         // logout any user that is logged in
         if (ParseUser.getCurrentUser() != null) {
-           // ParseUser.getCurrentUser().logOut();
+
             transitionToSocialMediaActivity();
             Log.i("myTag", "current user was transitioned to the media page");
         }
@@ -82,6 +86,8 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
             case R.id.btnSignupInstagram:
 
                 Log.i("myTag", "signup new button was pushed for submission of registration");
+
+
 
                 final ParseUser appUser = new ParseUser();
                 appUser.setUsername(mUserNameInstag.getText().toString());
@@ -134,10 +140,11 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         // encapsulate in a try / catch to catch the error generated when the user taps the screen and the
         // keyboard is not displayed.  This causes a crash without this code.
         try {
-            // access the inputmethodmanager
+            // access the inputMethodManager
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             // use the manager to hide the current focus (the keyboard) by getting its token
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            assert inputMethodManager != null;
+            inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(), 0);
         } catch (Exception e) {
             e.printStackTrace(); // sends some info to the stack regarding the error generated instead of causing a crash
         }

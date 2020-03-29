@@ -2,18 +2,17 @@ package com.example.ap_instagramclone;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.net.Uri;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,9 +30,8 @@ public class ProfileTab extends Fragment {
         // Required empty public constructor
     }
 
-    public interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListener {
         // TODO:  Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 
     @Override
@@ -53,8 +51,8 @@ public class ProfileTab extends Fragment {
         final ParseUser parseUser = ParseUser.getCurrentUser(); // getting the current user from Back4.com
 
         // retrieve data from server to populate the edtText fields prior to the user submitting new info
-        // will be null if not submitted previously
-
+        // will be null if any field was not submitted previously or data is missing from server,therefore
+        // all fields in the edit texts are set to blank for resubmission to the server using the onClick
         if (parseUser.get("profileName") == null || parseUser.get("Bio")==null || parseUser.get("Profession") == null || parseUser.get("FavouriteSports") == null || parseUser.get("Hobbies") == null ) {
             mEdtProfileName.setText("");
             mEdtProfileName.setText("");
@@ -63,27 +61,26 @@ public class ProfileTab extends Fragment {
             mEdtSports.setText("");
             mEdtHobbies.setText("");
 
-        } else{// populate the edit texts with data from the server
-            mEdtProfileName.setText(parseUser.get("profileName").toString());
-            mEdtBio.setText(parseUser.get("Bio").toString());
-            mEdtProfession.setText(parseUser.get("Profession").toString());
-            mEdtSports.setText(parseUser.get("FavouriteSports").toString());
-            mEdtHobbies.setText(parseUser.get("Hobbies").toString());
+        } else{// populate the edit texts with existing and complete data from the server
+            mEdtProfileName.setText(Objects.requireNonNull(parseUser.get("profileName")).toString());
+            mEdtBio.setText(Objects.requireNonNull(parseUser.get("Bio")).toString());
+            mEdtProfession.setText(Objects.requireNonNull(parseUser.get("Profession")).toString());
+            mEdtSports.setText(Objects.requireNonNull(parseUser.get("FavouriteSports")).toString());
+            mEdtHobbies.setText(Objects.requireNonNull(parseUser.get("Hobbies")).toString());
 
         }
-
-
+            // onClick for data submission from form with check for completion
             mBtnSbmtInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // store input text in a string variable for length checking
                     String ProfileName = mEdtProfileName.getText().toString();
                     String Hobbies = mEdtHobbies.getText().toString();
                     String Sports = mEdtSports.getText().toString();
                     String Profession = mEdtProfession.getText().toString();
                     String Bio = mEdtBio.getText().toString();
-                    Log.i("myTag", "Bio = "+Bio);
 
-                    // if any one field was not filled in the form, reset the field values to empty text
+                    // if any one field was not filled in the form (string length <1), reset the field values to empty text
                     if (Bio.length()<1 || Hobbies.length()<1 || Sports.length()<1 || ProfileName.length()<1 || Profession.length()<1) {
 
                         mEdtProfileName.setText(null);
@@ -93,7 +90,7 @@ public class ProfileTab extends Fragment {
                         mEdtHobbies.setText(null);
                         Toast.makeText(getContext(), "You must fill all fields", Toast.LENGTH_SHORT).show();
 
-                        // otherwise go ahead and put the input values to the parse server and give a toast message of success (or error)
+                        // otherwise go ahead and "put" the input values to the parse server and give a toast message of success (or error)
                     }else{
                         parseUser.put("profileName", mEdtProfileName.getText().toString());
                         parseUser.put("Hobbies", mEdtHobbies.getText().toString());
@@ -114,7 +111,7 @@ public class ProfileTab extends Fragment {
                     }
                 }
             });
-        // we also need to add a return statement that returns a view
+        // we also need to add a return statement that returns a view to the onCreateView method
         return view;
         }
     }
