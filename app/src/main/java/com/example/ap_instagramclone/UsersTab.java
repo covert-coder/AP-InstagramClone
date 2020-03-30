@@ -77,10 +77,10 @@ public class UsersTab extends Fragment {
                             // add a username from the parse server to the list, iteratively according to for stmt
                             //arrayList.add("username","Hobbies"+"username");
                             arrayList.add("User name:  "+ user.getUsername());
-                            arrayList.add("Hobbies;  "+ user.get("Hobbies").toString());
-                            arrayList.add("AutoBiography;  "+ user.get("Bio").toString());
-                            arrayList.add("Favourite Sports;  "+ user.get("FavouriteSports").toString());
-                            arrayList.add("Profession;  "+ user.get("Profession").toString());
+                            arrayList.add("Hobbies;  "+ Objects.requireNonNull(user.get("Hobbies")).toString());
+                            arrayList.add("AutoBiography;  "+ Objects.requireNonNull(user.get("Bio")).toString());
+                            arrayList.add("Favourite Sports;  "+ Objects.requireNonNull(user.get("FavouriteSports")).toString());
+                            arrayList.add("Profession;  "+ Objects.requireNonNull(user.get("Profession")).toString());
                             arrayList.add("______________________________________________");
 
                             // let the adapter know where we are in the list as iteration progresses

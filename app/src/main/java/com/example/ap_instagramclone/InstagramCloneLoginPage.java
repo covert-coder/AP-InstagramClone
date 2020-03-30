@@ -44,7 +44,7 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
                             public void done(ParseUser user, ParseException e) {
                                 if(user!=null && e==null){
                                     Toast.makeText(InstagramCloneLoginPage.this, "your login was successful "+user.get("username")
-                                            , Toast.LENGTH_LONG).show();
+                                            , Toast.LENGTH_SHORT).show();
                                 transitionToSocialMediaActivity();
                                 }else{
                                     Toast.makeText(InstagramCloneLoginPage.this, "your login failed: "+ e.getMessage(),

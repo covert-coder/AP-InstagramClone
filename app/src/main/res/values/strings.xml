@@ -22,5 +22,10 @@
     <string name="signup_new">signup new</string>
     <string name="or">or</string>
     <string name="instagram_logo">Instagram Logo</string>
+    <string name="add_a_description_to_your_picture">Add a description to your picture....</string>
+    <string name="share_image">Share Image</string>
+    <string name="drag_your_image_here">Drag your image here</string>
+    <string name="click_to_add_image">click to add image</string>
+    <string name="post_image">post image</string>
 
 </resources>
