@@ -32,9 +32,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         ParseUser.logOut();
         setTitle("Sign Up for Instagram"); // sets the title in the action bar for this main page
 
-//        Toast.makeText(this, "current user name is "
-//                + ParseUser.getCurrentUser().getUsername().toString(), Toast.LENGTH_LONG).show();
-
         // logout any user that is logged in
         if (ParseUser.getCurrentUser() != null) {
 
@@ -51,8 +48,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         // assigning the two buttons to the implemented onClickListener
         mSignUpBtn.setOnClickListener(this);
         mLoginBtn.setOnClickListener(this);
-
-
 
         // allowing the user to enter their data using the enter key by setting an
         // onKeyListener that looks for the enter key click and press down
@@ -87,8 +82,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
 
                 Log.i("myTag", "signup new button was pushed for submission of registration");
 
-
-
                 final ParseUser appUser = new ParseUser();
                 appUser.setUsername(mUserNameInstag.getText().toString());
                 appUser.setPassword(mPasswordInstag.getText().toString());
@@ -115,7 +108,7 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                             public void done(ParseException e) {
                                 if (e == null) {
                                     Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
-                                            "set successfully;", Toast.LENGTH_LONG).show();
+                                            "set successfully;", Toast.LENGTH_SHORT).show();
                                     signUpDialog.dismiss();
                                     // possibility of server error since e is not null
                                     Log.i("myTag", "sign up included all fields and dialog was dismissed");
@@ -125,7 +118,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                                             "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
                                     signUpDialog.dismiss();
                                     Log.i("myTag", "there was a problem with parse server sign up and the dialog was dismissed");
-
                                 }
                             }
                         });

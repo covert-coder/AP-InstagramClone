@@ -88,7 +88,6 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
             }
         });
     }
-        @Override
         public void onFragmentInteraction(Uri uri){
         }
     }

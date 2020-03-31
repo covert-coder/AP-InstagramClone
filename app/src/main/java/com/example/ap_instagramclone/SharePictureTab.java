@@ -8,15 +8,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.util.Log;
-import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,14 +22,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,9 +37,10 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
     private Button mBtnShareImg;
     private EditText mEditImgDescription;
     private ImageView mImgShare;
-    private Bitmap receivedImageBitmap;
     private ProgressBar mProgressBar;
     private ParseObject parseObject;
+    private ParseFile mParseFile;
+    private Bitmap receivedImageBitmap;
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -51,7 +48,7 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
             case R.id.imgPlace:
                 // first this if stmt checks to see if permission has been previously granted
                 // if it has, this is stored in,
-            if(android.os.Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(getContext(),
+            if(android.os.Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()),
                     Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
 
                 // body of if stmt
@@ -69,13 +66,13 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
 
                 Log.i("myTag","post image was pressed");
 
-                // confirming there is an image using; if the image has any size to it, (i.e., exists)
                 if(receivedImageBitmap != null){
 
                     // check to see if the description was filled out. An empty string will indicate it wasn't.
                     if(mEditImgDescription.getText().toString().equals("")){
                         Toast.makeText(getContext(), "You need to add a description before submission", Toast.LENGTH_LONG).show();
                     }else{
+                        mProgressBar.setVisibility(View.VISIBLE);
 
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         receivedImageBitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
@@ -85,12 +82,23 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                         parseObject.put("picture", parseFile);
                         parseObject.put("image_des", mEditImgDescription.getText().toString());
                         parseObject.put("username", ParseUser.getCurrentUser().getUsername());
-                        mProgressBar.setVisibility(View.VISIBLE);
-                        saveInBackground(); // call a method that saves to the parse server, below
+
+                        parseObject.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if(e==null){
+                                    //Toast.makeText(getContext(), "Done!!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Your image has been posted to the server", Toast.LENGTH_LONG).show();
+
+                                    mProgressBar.setVisibility(View.GONE);
+                                }else{
+                                    Toast.makeText(getContext(), "Error :"+e.getMessage(), Toast.LENGTH_LONG).show();
+                                    Log.i("myTag", "the error is; "+e.getMessage());
+                                }
+                            }
+                        });
                     }
-
                 }else
-
                     Toast.makeText(getContext(), "You must select an image by clicking on the image " +
                             "above before posting your image", Toast.LENGTH_LONG).show();
                 break;
@@ -100,22 +108,19 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
     public interface OnFragmentInteractionListener{
-        // TODO:  Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_share_picture_tab, container, false);
-
             mBtnShareImg = view.findViewById(R.id.btnShare);
             mEditImgDescription = view.findViewById(R.id.edtImageDescrip);
             mImgShare = view.findViewById(R.id.imgPlace);
             mImgShare.setOnClickListener(SharePictureTab.this);
             mBtnShareImg.setOnClickListener(SharePictureTab.this);
 
-            mProgressBar = (ProgressBar) view.findViewById(R.id.picPostProgress);
+            mProgressBar = view.findViewById(R.id.picPostProgress);
             mProgressBar.setVisibility(View.INVISIBLE);
 
     return view;
@@ -140,18 +145,22 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(1000,2000, null);
+        super.onActivityResult(requestCode,resultCode,data);
+        // if the request code for the image specified in the getChosenImage() method == 2000
         if(requestCode==2000) {
             if (resultCode == Activity.RESULT_OK) {
                 // Do something with the captured image.
                 try {
+                    assert data != null;
                     Uri selectedImage = data.getData();
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    assert selectedImage != null;
+                    Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    assert cursor != null;
                     cursor.moveToFirst();
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     String picturePath = cursor.getString(columnIndex);
-                    receivedImageBitmap = BitmapFactory.decodeFile(picturePath);
+                    receivedImageBitmap= BitmapFactory.decodeFile(picturePath);
                     mImgShare.setImageBitmap(receivedImageBitmap);
                     cursor.close();
                 } catch (Exception e) {
@@ -160,21 +169,6 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                 }
             }
         }
-        }
-        public void saveInBackground(){
-            parseObject.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-
-                    if(e==null){
-                        //Toast.makeText(getContext(), "Done!!", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(), "Your image has been posted to the server", Toast.LENGTH_LONG).show();
-                        mProgressBar.setVisibility(View.GONE);
-                    }else{
-                        Toast.makeText(getContext(), "Error :"+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
     }
+}
 
