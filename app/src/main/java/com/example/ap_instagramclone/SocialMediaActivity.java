@@ -1,15 +1,11 @@
 package com.example.ap_instagramclone;
 import android.Manifest;
-import android.content.ClipData;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -20,7 +16,6 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -28,12 +23,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.net.Uri;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import java.io.ByteArrayOutputStream;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -54,9 +47,9 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media);
 
-
         setTitle("Instagram Clone Demonstration App!"); // sets the title of the action bar
-        FloatingActionButton floatingActionButton = findViewById(R.id.fab); // assign and instantiate a circular floating action button (message icon)
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab); // assign and instantiate a
+                // circular floating action button (message icon) named fab
 
         // when the button is pushed, the snackbar appears at the screen bottom
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +58,7 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
                 Snackbar.make(view, "Press tabs", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
+
         configureTabLayout();  // calls the function below
     }
 
@@ -73,8 +67,8 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         //xml file activity_social_media.xml
         // it is a child of the AppBarLayout in the same file and appears as a view in the app bar
         // add tabs to tabLayout
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
-        tabLayout.addTab(tabLayout.newTab().setText("Users"));
+        tabLayout.addTab(tabLayout.newTab().setText("My Profile"));
+        tabLayout.addTab(tabLayout.newTab().setText("Other Users"));
         tabLayout.addTab(tabLayout.newTab().setText("Picture Share"));
 
         // the ViewPager handles scrolling/sliding of pages, is a member of the View superclass
@@ -83,8 +77,8 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         final ViewPager viewPager = findViewById(R.id.pager); // instantiated and assigned the "viewPager"
 
         // the statement below, creates a new instance of the class tabAdapter (tabAdapter.java)
-        // tabAdaptor.java extends the class FragmentPagerAdapter
-        // accessing the tabAdapter class and the methods therein.  This tab adapter is thus a PagerAdapter
+        // tabAdaptor.java extends the class FragmentPagerAdapter. This tab adapter is thus a PagerAdapter
+        // accessing the tabAdapter class and the methods therein.
         final PagerAdapter adapter = new tabAdapter(getSupportFragmentManager(), tabLayout.getTabCount()); //
 
         // the pager adapter, of tabAdapter class, is set to our viewPager object in the xml file
@@ -125,23 +119,29 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
 
     public void onFragmentInteraction(Uri uri) {
     }
-
+    // this method is called from the onOptionsItemSelected method and accesses storage on the users device
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 6000) {
             // if the user responded, and if that response was give permission then capture image
+            Log.i("myTag", "request code  = "+requestCode);
+
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.i("myTag", "grant results length = "+grantResults.length);
+
                 captureImage(); // call the captureImage method below
             }
         }
     }
-    // this requires and intent, in this case,
+    // this requires an intent.  Method is called from onOptionsItemsSelected
     public void captureImage() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // start the process of accessing the media
         startActivityForResult(intent, 4000); // we create this code here
-        // code moves from here to the onActivitResult method, below
+        // code moves from here to the onActivityResult method, below
+        Log.i("myTag", "onActivityResult was called");
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -156,7 +156,11 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
 
             Toast.makeText(SocialMediaActivity.this, "Your image is being uploaded to the server.  " + "\n"+
                     "Please wait for a message showing it has completed", Toast.LENGTH_SHORT).show();
+
+           // redirect to Async Task to divert non-UI coding from main thread
             AsyncTask CompressandSend = new CompressandSend().execute();
+
+            // return from Async thread
 
 
         }catch(Exception e){
@@ -167,74 +171,88 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
     private class CompressandSend extends AsyncTask <String, Void, ParseObject> {
         @Override
         protected ParseObject doInBackground(String... strings) {
+            // create a new instance of byteArrayOutputStream
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             // compression takes (format, quality, bytearrayoutputstream object) as parameters
-            // this process must compress and rewrite using the same file name
+            // this process appears to compress a png file and rewrite to storage using the same file name, or it could be stored in memory (not sure which)
             mBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             // convert the byteArrayOutputStream (compressed?) to a Byte Array and store it in bytes
             byte[] bytes = byteArrayOutputStream.toByteArray();
-            ParseFile parseFile = new ParseFile("pic.png", bytes);
-            parseObject = new ParseObject("Photo");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM:dd:yyyy", Locale.CANADA);
-            parseObject.put("picture", parseFile);
-            parseObject.put("image_des", "my pic, "+ dateFormat.format(new Date()));
-            parseObject.put("username", ParseUser.getCurrentUser().getUsername());
+            ParseFile parseFile = new ParseFile("pic.png", bytes); // create a new instance of ParseFile containing the compressed byte array
+            parseObject = new ParseObject("Photo"); // new instance of ParseObject, creates class called Photo
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM:dd:yyyy", Locale.CANADA); // new instance of SimpleDateFormat for use with pic
+            parseObject.put("picture", parseFile); // parseFile contains the compressed byte array (the image). It is put in the "picture" category of parse
+            parseObject.put("image_des", "my pic, "+ dateFormat.format(new Date()));// the date instance is added along with the image description from the edtText
+            parseObject.put("username", ParseUser.getCurrentUser().getUsername()); // include the username with the parse puts
 
-            return parseObject;
+            return parseObject; // this return is passed to the onPostExecute method below and a return is expected by the method here
         }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
         @Override
-        protected void onPostExecute(ParseObject parseObject) {
+        protected void onPostExecute(ParseObject parseObject) { // parseObject was passed from doInBackground, above
             super.onPostExecute(parseObject);
+
+
             parseObject.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e == null) {
-                        //Toast.makeText(getContext(), "Done!!", Toast.LENGTH_SHORT).show();
+
                         Toast.makeText(SocialMediaActivity.this, "Your image has been posted to the server",Toast.LENGTH_LONG).show();
 
-                        //mProgressBar.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(SocialMediaActivity.this, "Error :" + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             });
-            Toast.makeText(SocialMediaActivity.this, "Your picture was saved to the server!!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(SocialMediaActivity.this, "Your picture was saved to the server!!", Toast.LENGTH_LONG).show();
         }
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
     }
+    // method to inflate the menu in the app bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.my_menu, menu);
-
         return true;
     }
-
+    // method called when a menu item is selected from the menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // if the camera icon is clicked and permission has not yet been granted for reading external
         // storage then, we request permission to do just that
-        // if permission is already granted, we simply capture the image (else)
+        // if permission is already granted, we simply capture the image from the users storage (else)
         if (item.getItemId() == R.id.post_image_item) {
-            Log.i("myTag", "item id was the camera icon");
+
+            // if the SDK is newer and permission will consequently be needed, and permission hasn't been granted already
             if (android.os.Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
                     PackageManager.PERMISSION_GRANTED) {
+                // the request code below is generated by us and is unique within this app
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 6000);
-                Log.i("myTag", "permission request was called in onOptionsItem...");
-            }           // the request code above is generated by us and is unique within this app
-            // from here the code moves to the onRequetPermissionsResult method
-            captureImage();
-        } else
-            captureImage();
-            Log.i("myTag", "permissions already exist or sdk is less than 23");
+                Log.i("myTag", "the build version is >23 and permission was not granted = ");
 
+            } else {
+                // from here the code moves to the onRequestPermissionsResult method which then directs to the
+
+                Log.i("myTag", "either the SDK was <23 or permission was previously granted in which case," +
+                        "we should go directly to captureImage and bypass the onRequestPermissionsResult which looks" +
+                        "for request code = 600.  it isn't though so should go directly to capture image");
+                captureImage();
+            }
+            Log.i("myTag", "item selected was post_image_item ");
+
+        } else if (item.getItemId() == R.id.logout_user_item){
+//            captureImage(); // call the captureImage method
+            ParseUser.getCurrentUser().logOut();
+            finish();
+            Log.i("myTag", "captureImage was called from onOptionsItemSelected");
+        }
         return super.onOptionsItemSelected(item);
     }
 }

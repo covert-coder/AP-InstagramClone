@@ -44,9 +44,9 @@ public class tabAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Profile";
+                return "Edit Profile";
             case 1:
-                return "Users";
+                return "Other Users";
             case 2:
                 return "Share Pictures";
             default:

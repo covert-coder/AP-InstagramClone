@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E289C6"
+    android:background="#8D94A3"
     android:onClick="rootLayoutLoginPageTapped"
     tools:context=".InstagramCloneLoginPage">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="88dp"
-        android:layout_height="122dp"
+        android:layout_width="112dp"
+        android:layout_height="132dp"
+        android:contentDescription="@string/instagram_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/g4520"
-        android:contentDescription="@string/instagram_logo" />
+        app:srcCompat="@drawable/g4520" />
 
     <EditText
         android:id="@+id/txtEmailExist"
@@ -25,9 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:autoText="false"
+        android:background="@color/cardview_light_background"
         android:ems="10"
         android:hint="@string/please_enter_email"
         android:inputType="textAutoComplete|textEmailAddress"
+        android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -37,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
+        android:background="@color/cardview_light_background"
         android:ems="10"
         android:hint="@string/please_enter_password"
         android:inputType="textPassword"
@@ -49,13 +52,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="30dp"
-        android:background="#D98D4A"
+        android:background="#4F7783"
         android:text="@string/login"
-        android:textColor="#FFFF"
+        android:textColor="#090909"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassExist" />
 
@@ -64,9 +68,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="30dp"
-        android:background="#E4563A"
+        android:background="#3AB4E4"
         android:text="@string/signup_new"
         android:textColor="#070707"
         android:textSize="24sp"
@@ -79,11 +83,12 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="84dp"
         android:text="@string/or"
-        android:textColor="#FFFF"
+        android:textColor="#070707"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLoginExisting" />
 </androidx.constraintlayout.widget.ConstraintLayout>
