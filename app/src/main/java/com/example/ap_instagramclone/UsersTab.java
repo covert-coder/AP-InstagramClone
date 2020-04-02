@@ -3,6 +3,8 @@ package com.example.ap_instagramclone;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import java.util.ArrayList;
@@ -50,11 +53,12 @@ public class UsersTab extends Fragment {
 
         // assign the array for storing the usernames in the for loop below
         arrayList = new ArrayList<>();
-
+        final ParseUser parseUser = ParseUser.getCurrentUser();
         // set the type of parse query to <ParseUser>
         final ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-
-        // flter out the currentUser using "where not equal to" followed by what we want to filter out
+//        String User = ParseUser.getCurrentUser().getUsername();
+//        Log.i("myTag","parse users name is; "+User);
+        // filter out the currentUser using "where not equal to" followed by what we want to filter out
         // that exception is the user name and we get it using ParseUser.get.....
         userQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
 
@@ -65,22 +69,23 @@ public class UsersTab extends Fragment {
             public void done(List<ParseUser> userList, ParseException e) {
 
                 if(e==null){
+                    Log.i("myTag","there were no parse exceptions in line 71 of users tab");
                     if(userList.size()>0){
+                        Log.i("myTag","userList.size is > 0");
+
                         for(ParseUser user: userList){
                             // this is where we will create our array list, but we first needed to initialize and define
                             // that array in our class userTab and in the onCreateView, above
-
+                            Log.i("myTag","my user list is; "+userList);
                             // the parameters of ArrayAdapter are; the context, the line item
                             // designated to populate the array, and the name of our array
                             mAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, arrayList);
 
-                            // add a username from the parse server to the list, iteratively according to for stmt
-                            //arrayList.add("username","Hobbies"+"username");
                             arrayList.add("User name:  "+ user.getUsername());
-                            arrayList.add("Hobbies;  "+ Objects.requireNonNull(user.get("Hobbies")).toString());
-                            arrayList.add("AutoBiography;  "+ Objects.requireNonNull(user.get("Bio")).toString());
-                            arrayList.add("Favourite Sports;  "+ Objects.requireNonNull(user.get("FavouriteSports")).toString());
-                            arrayList.add("Profession;  "+ Objects.requireNonNull(user.get("Profession")).toString());
+                            arrayList.add("Hobbies:  "+user.getString("Hobbies"));
+                            arrayList.add("AutoBiography;  "+ user.getString("Bio"));
+                            arrayList.add("Favourite Sports;  "+ user.getString("FavouriteSports"));
+                            arrayList.add("Profession;  "+user.getString("Profession"));
                             arrayList.add("______________________________________________");
 
                             // let the adapter know where we are in the list as iteration progresses
@@ -94,6 +99,8 @@ public class UsersTab extends Fragment {
                     }
 
                 }
+
+                //Log.i("myTag","parse exception is; "+e.getMessage());
             }
         });
         return view;

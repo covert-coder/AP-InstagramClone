@@ -141,10 +141,11 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
             e.printStackTrace(); // sends some info to the stack regarding the error generated instead of causing a crash
         }
     }
-    // this method, takes us to the social media page when signup is complete
+    // this method, takes us to the social media page when login is complete
     private void transitionToSocialMediaActivity(){
-            Intent intentSocialActivity = new Intent(InstagramCloneMainPage.this, SocialMediaActivity.class);
-            startActivity(intentSocialActivity);
+           Intent intentSocialActivity = new Intent(InstagramCloneMainPage.this, SocialMediaActivity.class);
+           startActivity(intentSocialActivity);
+           finish();
     }
 } // end of main class
 

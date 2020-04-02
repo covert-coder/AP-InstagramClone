@@ -84,5 +84,7 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
     private void transitionToSocialMediaActivity(){
         Intent intentSocialActivity = new Intent(InstagramCloneLoginPage.this, SocialMediaActivity.class);
         startActivity(intentSocialActivity);
+        finish();
+        Log.i("myTag", "transition to social media page was called and login page was finished");
     }
 }

@@ -70,28 +70,35 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         tabLayout.addTab(tabLayout.newTab().setText("My Profile"));
         tabLayout.addTab(tabLayout.newTab().setText("Other Users"));
         tabLayout.addTab(tabLayout.newTab().setText("Picture Share"));
-
+        Log.i("myTag", "tab layouts were added");
         // the ViewPager handles scrolling/sliding of pages, is a member of the View superclass
         // a pager adapter is assigned to this View class that is responsible for handling the fragments (tabs)
         // pager is the name assigned to the ViewPager in the activity_social_media xml layout
         final ViewPager viewPager = findViewById(R.id.pager); // instantiated and assigned the "viewPager"
+        Log.i("myTag", "viewPager was assigned");
 
         // the statement below, creates a new instance of the class tabAdapter (tabAdapter.java)
         // tabAdaptor.java extends the class FragmentPagerAdapter. This tab adapter is thus a PagerAdapter
         // accessing the tabAdapter class and the methods therein.
         final PagerAdapter adapter = new tabAdapter(getSupportFragmentManager(), tabLayout.getTabCount()); //
+        Log.i("myTag", "adapter was set as a tabAdapter, supportfragmentmanager called");
 
         // the pager adapter, of tabAdapter class, is set to our viewPager object in the xml file
         viewPager.setAdapter(adapter);
+        Log.i("myTag", "viewPager had its adapter set to adapter");
 
         // tabLayout, an object of class TabLayout contains our three tabs in a horizontal array
         // adding an OnPageChangeListener to the viewPager with the contents of tabLayout
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        Log.i("myTag", "on page change listener was added to viewPager");
+
 
         // the onTabSelectedListener is now added to that "three-tab" tabLayout for tab specificity
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                Log.i("myTag", "onTabSelectedListener was added");
+
                 // position is determined by where the user taps on the tab array on the action bar
                 // this is built-in with TabLayout and is not the same "position" as the variable in tabAdapter.java
                 // that value is passed to tabAdapter.java, regardless, for use as "position" in that class by
@@ -237,19 +244,21 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 6000);
                 Log.i("myTag", "the build version is >23 and permission was not granted = ");
 
-            } else {
-                // from here the code moves to the onRequestPermissionsResult method which then directs to the
-
-                Log.i("myTag", "either the SDK was <23 or permission was previously granted in which case," +
-                        "we should go directly to captureImage and bypass the onRequestPermissionsResult which looks" +
-                        "for request code = 600.  it isn't though so should go directly to capture image");
-                captureImage();
             }
+            // from here the code moves to the onRequestPermissionsResult method which then directs to the
+
+            Log.i("myTag", "either the SDK was <23 or permission was previously granted in which case," +
+                    "we should go directly to captureImage and bypass the onRequestPermissionsResult which looks" +
+                    "for request code = 600.  it isn't though so should go directly to capture image");
+            captureImage();
             Log.i("myTag", "item selected was post_image_item ");
 
         } else if (item.getItemId() == R.id.logout_user_item){
-//            captureImage(); // call the captureImage method
+
+            Intent intent = new Intent(SocialMediaActivity.this, InstagramCloneMainPage.class);
+            startActivity(intent);
             ParseUser.getCurrentUser().logOut();
+            Log.i("myTag", "current user logged out in if stmt of social media activity");
             finish();
             Log.i("myTag", "captureImage was called from onOptionsItemSelected");
         }
