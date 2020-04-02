@@ -3,9 +3,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,13 +21,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.Objects;
+
+import javax.security.auth.login.LoginException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,14 +43,15 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
     private ImageView mImgShare;
     private ProgressBar mProgressBar;
     private ParseObject parseObject;
-    private ParseFile mParseFile;
-    private Bitmap receivedImageBitmap;
-
+    private Bitmap bitmap;
+    private byte[] bytes;
+    ByteArrayOutputStream byteArrayOutputStream;
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
 
             case R.id.imgPlace:
+
                 // first this if stmt checks to see if permission has been previously granted
                 // if it has, this is stored in,
                 if (android.os.Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()),
@@ -61,14 +65,31 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                     // the manifest as a unique identifier of this READ_EXTERNAL_STORAGE request
                 } else {
                     getChosenImage();
+                    Log.i("myTag", "get chosen image was called");
                 }
                 break;
 
             case R.id.btnShare:
-                mProgressBar.setVisibility(View.VISIBLE);
-                Log.i("myTag", "post image was pressed");
 
-                AsyncTask progressBar = new progressBar().execute();
+                mProgressBar.setVisibility(View.VISIBLE);
+
+                // confirming there is an image using; if the image has any size to it, (i.e., exists)
+                if(bitmap != null){
+                    Log.i("myTag", "bitmap is not null");
+
+                    // check to see if the description was filled out. An empty string will indicate it wasn't.
+                    if(mEditImgDescription.getText().toString().equals("")){
+                        Toast.makeText(getContext(), "You need to add a description before submission", Toast.LENGTH_LONG).show();
+                    }else{
+                        // call an off thread method to prevent slowing, lagging, or hanging of UI such as progress bar
+                        // AsyncTask method contains, file compression, parse commands/puts and save
+                        AsyncTask progressBar = new progressBar().execute();
+                        mProgressBar.setVisibility(View.VISIBLE);
+                    }
+                }else {
+                    Toast.makeText(getContext(), "You must select an image by clicking on the image " +
+                            "above before posting your image", Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
@@ -77,6 +98,7 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
     }
     public interface OnFragmentInteractionListener{
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,10 +116,11 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
     return view;
     }
     private void getChosenImage() {
-        Toast.makeText(getContext(), "access to images was granted", Toast.LENGTH_LONG).show();
-        Intent upLoadIntent = new Intent(Intent.ACTION_PICK,
+        // Toast.makeText(getContext(), "access to images was granted", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(upLoadIntent, 2000);
+        startActivityForResult(intent, 2000);
+        Log.i("myTag", "start activity for result was called");
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -115,60 +138,65 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         // if the request code for the image specified in the getChosenImage() method == 2000
+        Log.i("myTag", "onActivityResult was entered");
         if(requestCode==2000) {
+            Log.i("myTag", "request code == 2000");
             if (resultCode == Activity.RESULT_OK) {
+                Log.i("myTag", "resultCode == Activity.RESULT_OK");
+
                 // Do something with the captured image.
                 try {
                     assert data != null;
                     Uri selectedImage = data.getData();
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    Log.i("myTag", "filePathColumn = "+filePathColumn.toString());
+
                     assert selectedImage != null;
-                    Cursor cursor = Objects.requireNonNull(getActivity()).getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    assert cursor != null;
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
-                    receivedImageBitmap= BitmapFactory.decodeFile(picturePath);
-                    mImgShare.setImageBitmap(receivedImageBitmap);
-                    cursor.close();
+                    bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),selectedImage);
+
+                    //Cursor cursor = Objects.@NonNull(getActivity()).getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+//                    assert cursor != null;
+//                    Log.i("myTag", "cursor = "+cursor);
+//                    cursor.moveToFirst();
+//                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                    Log.i("myTag", "column index 0 = "+columnIndex);
+
+//                    String picturePath = cursor.getString(columnIndex);
+//                    Log.i("myTag", "picturePath = "+picturePath);
+                    // set the placeholder to have the same image as the one chosen from the users data
+                    mImgShare.setImageBitmap(bitmap);
+
+//                    cursor.close();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.i("myTag", "the exception is; " + e.getMessage());
                 }
+            }else{
+                Log.i("myTag", "result code was not ok");
             }
+        }else{
+            Log.i("myTag", "request code did not = 2000");
         }
     }
 
     // AsyncTask to isolate resource intensive task from main thread, thereby allowing progress bar to run
     // immediately and to prevent crashes should the "post image" button be pressed again or should the
     // screen be rotated (to landscape)
-    private class progressBar extends AsyncTask<String, Void, ParseObject> {
+    private class progressBar extends AsyncTask <String, Void, ParseObject> {
 
         @Override
         protected ParseObject doInBackground(String... strings) {
 
-            if (receivedImageBitmap != null) {
-
                 // check to see if the description was filled out. An empty string will indicate it wasn't.
-                if (mEditImgDescription.getText().toString().equals("")) {
-                    //Toast.makeText(getContext(), "You need to add a description before submission", Toast.LENGTH_LONG).show();
-                } else {
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+            bytes = byteArrayOutputStream.toByteArray();
+            ParseFile newPicture = new ParseFile("pic.png", bytes);
+            parseObject = new ParseObject("Photo");
+            parseObject.put("picture", newPicture);
 
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                    receivedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    byte[] bytes = byteArrayOutputStream.toByteArray();
-                    ParseFile parseFile = new ParseFile("pic.png", bytes);
-                    parseObject = new ParseObject("Photo");
-                    parseObject.put("picture", parseFile);
-                    parseObject.put("image_des", mEditImgDescription.getText().toString());
-                    parseObject.put("username", ParseUser.getCurrentUser().getUsername());
-
-                }
-            } else {
-                //Toast.makeText(getContext(), "You must select an image by clicking on the image " +
-                        //"above before posting your image", Toast.LENGTH_LONG).show();
-            }
-            return parseObject;
+            return null;
         }
 
         @Override
@@ -179,6 +207,8 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
         @Override
         protected void onPostExecute(ParseObject s) {
             super.onPostExecute(s);
+            parseObject.put("image_des", mEditImgDescription.getText().toString());
+            parseObject.put("username", ParseUser.getCurrentUser().getUsername());
             parseObject.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {

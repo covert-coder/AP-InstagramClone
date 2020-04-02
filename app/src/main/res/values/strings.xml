@@ -26,6 +26,12 @@
     <string name="share_image">Share Image</string>
     <string name="drag_your_image_here">Drag your image here</string>
     <string name="click_to_add_image">click to add image</string>
-    <string name="post_image">post image</string>
+
+    <string name="logout_user">Logout User</string>
+
+    <string name="to_share_your_image_first_add_a_description_then_click_on_the_image_above">to share your image, first add a description, then click on the image above</string>
+    <string name="logout">Logout</string>
+
+
 
 </resources>

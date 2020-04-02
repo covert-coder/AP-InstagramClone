@@ -12,7 +12,6 @@
         android:layout_width="430dp"
         android:layout_height="215dp"
         android:layout_marginTop="16dp"
-        android:contentDescription="@string/click_to_add_image"
         android:hapticFeedbackEnabled="true"
         android:src="@drawable/placeholder"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,19 +20,20 @@
 
     <EditText
         android:id="@+id/edtImageDescrip"
-        android:layout_width="301dp"
-        android:layout_height="84dp"
+        android:layout_width="311dp"
+        android:layout_height="100dp"
         android:layout_marginStart="53dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="53dp"
         android:ems="10"
-        android:hint="to share your image, first add a description, then click on the image above"
+        android:hint="@string/to_share_your_image_first_add_a_description_then_click_on_the_image_above"
         android:inputType="textMultiLine"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPlace"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/btnShare"
@@ -43,7 +43,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="53dp"
         android:background="@android:color/holo_green_light"
-        android:text="@string/post_image"
+        android:text="Post Your Image"
         android:textColor="@color/design_default_color_primary_dark"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
