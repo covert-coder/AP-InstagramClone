@@ -12,7 +12,7 @@
         android:id="@+id/txtPassInstagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:autofillHints=""
         android:background="#FFFF"
         android:ems="10"
@@ -36,10 +36,10 @@
     <Button
         android:id="@+id/btnSignupInstagram"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="30dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="5dp"
         android:background="#5D66CA"
         android:shadowDy="0"
         android:shadowRadius="15"
@@ -55,7 +55,7 @@
         android:id="@+id/txtEmailInstagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:background="#FFFF"
         android:ems="10"
         android:hint="Please enter an email"
@@ -71,25 +71,25 @@
     <Button
         android:id="@+id/btnLoginInstagram"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="49dp"
-        android:layout_marginEnd="30dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="5dp"
         android:background="#2729BD"
         android:shadowDy="0"
-        android:text="Use Login"
+        android:text="User Login"
         android:textColor="#FFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSignupInstagram" />
 
     <EditText
         android:id="@+id/txtUserInstagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:background="#FFFF"
         android:ems="10"
         android:hint="Please enter a username"
@@ -99,18 +99,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEmailInstagram" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="or"
-        android:textColor="#0B0A0A"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignupInstagram" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
