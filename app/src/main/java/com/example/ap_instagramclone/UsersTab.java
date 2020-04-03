@@ -76,8 +76,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
         final ParseUser parseUser = ParseUser.getCurrentUser();
         // set the type of parse query to <ParseUser>
         final ParseQuery<ParseUser> userQuery = ParseUser.getQuery();
-//        String User = ParseUser.getCurrentUser().getUsername();
-//        Log.i("myTag","parse users name is; "+User);
+
         // filter out the currentUser using "where not equal to" followed by what we want to filter out
         // that exception is the user name and we get it using ParseUser.get.....
         userQuery.whereNotEqualTo("username", ParseUser.getCurrentUser().getUsername());
@@ -86,17 +85,14 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
         // less the excluded current user
         userQuery.findInBackground(new FindCallback<ParseUser>() {
             @Override
-            public void done(List<ParseUser> userList, ParseException e) {
+            public void done(List<ParseUser> ourUserList, ParseException e) {
 
                 if(e==null){
-                    Log.i("myTag","there were no parse exceptions in line 71 of users tab");
-                    if(userList.size()>0){
-                        Log.i("myTag","userList.size is > 0");
+                    if(ourUserList.size()>0){
 
-                        for(ParseUser user: userList){
+                        for(ParseUser user: ourUserList){
                             // this is where we will create our array list, but we first needed to initialize and define
                             // that array in our class userTab and in the onCreateView, above
-                            Log.i("myTag","my user list is; "+userList);
                             // the parameters of ArrayAdapter are; the context, the line item
                             // designated to populate the array, and the name of our array
                             mAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, arrayList);
@@ -120,7 +116,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
 
                 }
 
-                //Log.i("myTag","parse exception is; "+e.getMessage());
+
             }
         });
         return view;

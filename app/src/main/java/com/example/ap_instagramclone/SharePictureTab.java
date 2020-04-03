@@ -65,7 +65,6 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                     // the manifest as a unique identifier of this READ_EXTERNAL_STORAGE request
                 } else {
                     getChosenImage();
-                    Log.i("myTag", "get chosen image was called");
                 }
                 break;
 
@@ -75,7 +74,6 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
 
                 // confirming there is an image using; if the image has any size to it, (i.e., exists)
                 if(bitmap != null){
-                    Log.i("myTag", "bitmap is not null");
 
                     // check to see if the description was filled out. An empty string will indicate it wasn't.
                     if(mEditImgDescription.getText().toString().equals("")){
@@ -120,7 +118,6 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, 2000);
-        Log.i("myTag", "start activity for result was called");
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -219,7 +216,6 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                         mProgressBar.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(getContext(), "Error :" + e.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.i("myTag", "the error is; " + e.getMessage());
                     }
                 }
             });

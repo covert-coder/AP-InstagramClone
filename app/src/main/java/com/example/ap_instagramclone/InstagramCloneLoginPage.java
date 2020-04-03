@@ -58,7 +58,6 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
         findViewById(R.id.btnSignupReturn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("myTag", "signup button was pushed on login page");
                 Intent intentSignUp = new Intent(InstagramCloneLoginPage.this,
                         InstagramCloneMainPage.class);
                 startActivity(intentSignUp);
@@ -85,6 +84,5 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
         Intent intentSocialActivity = new Intent(InstagramCloneLoginPage.this, SocialMediaActivity.class);
         startActivity(intentSocialActivity);
         finish();
-        Log.i("myTag", "transition to social media page was called and login page was finished");
     }
 }

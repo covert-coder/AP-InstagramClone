@@ -36,7 +36,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         if (ParseUser.getCurrentUser() != null) {
 
             transitionToSocialMediaActivity();
-            Log.i("myTag", "current user was transitioned to the media page");
         }
         // assign edit texts to variables
         mUserNameInstag = findViewById(R.id.txtUserInstagram);
@@ -58,7 +57,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                 if(keyCode==KeyEvent.KEYCODE_ENTER && event.getAction()==KeyEvent.ACTION_DOWN){
 
                     onClick(mSignUpBtn); // calls the onClick assigned to the signUP button as though it was clicked
-                    Log.i("myTag","enter key pressed");
                 }
                 return false;
             }
@@ -70,7 +68,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         switch (view.getId()) {
             // the login button is pressed sending user to the login screen
             case R.id.btnLoginInstagram:
-                Log.i("myTag", "login button was pushed sending user to login screen");
                 Intent intentLogin = new Intent(InstagramCloneMainPage.this,
                         InstagramCloneLoginPage.class);
                 startActivity(intentLogin);
@@ -80,7 +77,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
             // plus error checking
             case R.id.btnSignupInstagram:
 
-                Log.i("myTag", "signup new button was pushed for submission of registration");
 
                 final ParseUser appUser = new ParseUser();
                 appUser.setUsername(mUserNameInstag.getText().toString());
@@ -99,7 +95,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                     Toast.makeText(InstagramCloneMainPage.this, "email address, password, " +
                             "and username must be provided", Toast.LENGTH_LONG).show();
                     signUpDialog.dismiss(); // signup is not occurring so..
-                    Log.i("myTag", "a field was left unfilled and the dialog was dismissed");
                 }
                 // but.., if all fields have been filled, then
                 else{
@@ -111,13 +106,11 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
                                             "set successfully;", Toast.LENGTH_SHORT).show();
                                     signUpDialog.dismiss();
                                     // possibility of server error since e is not null
-                                    Log.i("myTag", "sign up included all fields and dialog was dismissed");
                                     transitionToSocialMediaActivity();
                                 } else {
                                     Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
                                             "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
                                     signUpDialog.dismiss();
-                                    Log.i("myTag", "there was a problem with parse server sign up and the dialog was dismissed");
                                 }
                             }
                         });
