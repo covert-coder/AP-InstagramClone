@@ -1,34 +1,37 @@
 package com.example.ap_instagramclone;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
 import java.util.List;
 import java.util.Objects;
 
-public class UsersPosts extends AppCompatActivity {
+
+public class UsersPosts extends FragmentActivity {
 
 private LinearLayout mLinearLayout;
+private FrameLayout mDialogLayout;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,19 @@ private LinearLayout mLinearLayout;
         parseQuery.orderByDescending("createdAt");
 
         // TODO create a progressBar to run while the photos download
+        // Begin the transaction
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        // Replace the contents of the container with the new fragment
+        ft.replace(R.id.alert_dialog, new CustomAlert());
+        // or ft.add(R.id.your_placeholder, new FooFragment());
+        // Complete the changes added above
+        ft.commit();
+
+//        FragmentActivity alertFragmentActivity = new FragmentActivity();
+//        //alertFragmentActivity.(getIntent().getExtras());
+//        FragmentManager displayFragment = alertFragmentActivity.getSupportFragmentManager();
+//        displayFragment.beginTransaction().add(R.id.frameLayout, alertFragmentActivity).commit();
+
         // TODO move the resource intensive code into an Async method
 
         parseQuery.findInBackground(new FindCallback<ParseObject>() {
@@ -143,10 +159,17 @@ private LinearLayout mLinearLayout;
                                     imageDescription.setTextSize(24f);
 
                                     // now add the two UI components to the layout
-
                                     mLinearLayout.addView(imageDescription);
                                     mLinearLayout.addView(postImageView);
+
+                                    // calling a method in CustomAlert.java to cancel the alert
+                                    CustomAlert fragmentDemo = CustomAlert;
+                                    getSupportFragmentManager().findFragmentById(R.id.alert_dialog);
+                                    CustomAlert.doSomething("true");
+
                                 }
+
+
                             }
                         });
                     }
@@ -155,7 +178,16 @@ private LinearLayout mLinearLayout;
                             "via that entry", Toast.LENGTH_SHORT).show();
                     finish(); // closes this activity and reverts to the UsersTab activity
                 }
+
             }
+
         });
+
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 }
