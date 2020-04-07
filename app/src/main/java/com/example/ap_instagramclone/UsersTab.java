@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -64,8 +66,16 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
             @Override
             public void done(ParseUser ourTargetedUser, ParseException e) {
                 if(ourTargetedUser!=null && e==null){
-                    Toast.makeText(getContext(), ourTargetedUser.get("Profession").toString(),
-                            Toast.LENGTH_SHORT).show();
+
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    // Replace the contents of the container with the new fragment
+                    fragmentTransaction.replace(R.id.alert_dialog, new CustomAlert());
+                    // or ft.add(R.id.your_placeholder, new FooFragment());
+                    // Complete the changes added above
+                    fragmentTransaction.addToBackStack("photoOutput");
+                    fragmentTransaction.commit();
+//                    Toast.makeText(getContext(), ourTargetedUser.get("Profession").toString(),
+//                            Toast.LENGTH_SHORT).show();
                     //TODO: add a method to launch an alert dialog containing all of the user stats
                 }
             }

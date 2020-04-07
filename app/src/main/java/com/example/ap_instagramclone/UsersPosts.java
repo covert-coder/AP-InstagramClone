@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -27,13 +28,11 @@ import com.parse.ParseQuery;
 import java.util.List;
 import java.util.Objects;
 
-
 public class UsersPosts extends FragmentActivity {
 
     private LinearLayout mLinearLayout;
     private FrameLayout mDialogLayout;
     private CustomAlert fragmentDemo;
-    private FragmentTransaction mFragmentTransaction;
 
     @SuppressLint("ResourceType")
     @Override
@@ -64,15 +63,15 @@ public class UsersPosts extends FragmentActivity {
         // then sort the results by date/time submitted to the server
         parseQuery.orderByDescending("createdAt");
 
-        // TODO create a progressBar to run while the photos download
-        // Begin the transaction
-        mFragmentTransaction = getSupportFragmentManager().beginTransaction();
-        // Replace the contents of the container with the new fragment
-        mFragmentTransaction.replace(R.id.alert_dialog, new CustomAlert());
-        // or ft.add(R.id.your_placeholder, new FooFragment());
-        // Complete the changes added above
-        mFragmentTransaction.addToBackStack("photoOutput");
-        mFragmentTransaction.commit();
+            // TODO create a progressBar to run while the photos download
+            // Begin the transaction
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+        fragmentTransaction.replace(R.id.alert_dialog, new CustomAlert());
+            // or ft.add(R.id.your_placeholder, new FooFragment());
+            // Complete the changes added above
+        fragmentTransaction.addToBackStack("photoOutput");
+        fragmentTransaction.commit();
 
         // TODO move the resource intensive code into an Async method
 
@@ -81,11 +80,6 @@ public class UsersPosts extends FragmentActivity {
             // and, our query was restricted to only one user so the objects are for that user only
             @Override
             public void done(List<ParseObject> ThisUsersObjects, ParseException e) {
-
-//                // get the container for our fragment from this classes layout
-//                getSupportFragmentManager().findFragmentById(R.id.alert_dialog);
-//                CustomAlert fragmentDemo;
-//                fragmentDemo = new CustomAlert();
 
                 // make sure text objects are valid from server. i.e, There is something there.
                 if (ThisUsersObjects.size() > 0 && e == null) {
@@ -168,29 +162,22 @@ public class UsersPosts extends FragmentActivity {
                                     mLinearLayout.addView(imageDescription);
                                     mLinearLayout.addView(postImageView);
                                     stopTheAlert();
-
-                                    // calling a method in CustomAlert.java to cancel the alert
-
                                 }
                             }
                         });
-
                     }
-                } else {
+                } else{
                     Toast.makeText(UsersPosts.this, "No photos are accessible " +
                             "via that entry", Toast.LENGTH_SHORT).show();
+                    stopTheAlert();
                 }
             }
-
         });
     }
-
     public void stopTheAlert() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack();
-
-            //finish();
         }
     }
 }

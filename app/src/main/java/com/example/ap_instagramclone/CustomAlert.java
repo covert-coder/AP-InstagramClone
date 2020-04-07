@@ -42,12 +42,6 @@ public class CustomAlert extends Fragment {
         mProgressBar = view.findViewById(R.id.progressBar2);
         mProgressBar = new ProgressBar(getContext());
         mProgressBar.setVisibility(View.VISIBLE);
-        mTextView1 = view.findViewById(R.id.txtView1);
-        mTextView2 = view.findViewById(R.id.txtView2);
-        mFrame = view.findViewById(R.id.frameLayout);
-        mFrame.setVisibility(View.VISIBLE);
-        mTextView1.setVisibility(View.VISIBLE);
-        mTextView2.setVisibility(View.VISIBLE);
 
         return view;
     }
