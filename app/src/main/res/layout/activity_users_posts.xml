@@ -21,13 +21,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <FrameLayout
-                android:id="@+id/alert_dialog"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:scaleType="centerInside">
-
-            </FrameLayout>
         </LinearLayout>
     </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/alert_dialog"
+        android:layout_width="188dp"
+        android:layout_height="178dp"
+        android:layout_gravity="center|center_vertical"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

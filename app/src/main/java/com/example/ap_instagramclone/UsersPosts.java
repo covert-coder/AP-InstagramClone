@@ -1,9 +1,11 @@
 package com.example.ap_instagramclone;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,8 +30,10 @@ import java.util.Objects;
 
 public class UsersPosts extends FragmentActivity {
 
-private LinearLayout mLinearLayout;
-private FrameLayout mDialogLayout;
+    private LinearLayout mLinearLayout;
+    private FrameLayout mDialogLayout;
+    private CustomAlert fragmentDemo;
+    private FragmentTransaction mFragmentTransaction;
 
     @SuppressLint("ResourceType")
     @Override
@@ -37,8 +41,8 @@ private FrameLayout mDialogLayout;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_posts);
 
-        mLinearLayout=findViewById(R.id.linearLayoutScroll); // assigning a linear layout for storage
-                            // of both the photo imageView and the description of the photo imageView
+        mLinearLayout = findViewById(R.id.linearLayoutScroll); // assigning a linear layout for storage
+        // of both the photo imageView and the description of the photo imageView
 
         // use the data sent from the UsersTab class
         Intent receivedIntentObject = getIntent(); //automatically gets any intent sent to this java class
@@ -47,7 +51,7 @@ private FrameLayout mDialogLayout;
         String receivedUsersName = receivedIntentObject.getStringExtra("username");
 
         // set the title of the UsersPosts page to match the user photos accessed
-        setTitle(receivedUsersName+ "'s pictures");
+        setTitle(receivedUsersName + "'s pictures");
 
         // get the parsed data
         ParseQuery<ParseObject> parseQuery = new ParseQuery<>("Photo");
@@ -62,17 +66,13 @@ private FrameLayout mDialogLayout;
 
         // TODO create a progressBar to run while the photos download
         // Begin the transaction
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        mFragmentTransaction = getSupportFragmentManager().beginTransaction();
         // Replace the contents of the container with the new fragment
-        ft.replace(R.id.alert_dialog, new CustomAlert());
+        mFragmentTransaction.replace(R.id.alert_dialog, new CustomAlert());
         // or ft.add(R.id.your_placeholder, new FooFragment());
         // Complete the changes added above
-        ft.commit();
-
-//        FragmentActivity alertFragmentActivity = new FragmentActivity();
-//        //alertFragmentActivity.(getIntent().getExtras());
-//        FragmentManager displayFragment = alertFragmentActivity.getSupportFragmentManager();
-//        displayFragment.beginTransaction().add(R.id.frameLayout, alertFragmentActivity).commit();
+        mFragmentTransaction.addToBackStack("photoOutput");
+        mFragmentTransaction.commit();
 
         // TODO move the resource intensive code into an Async method
 
@@ -81,13 +81,19 @@ private FrameLayout mDialogLayout;
             // and, our query was restricted to only one user so the objects are for that user only
             @Override
             public void done(List<ParseObject> ThisUsersObjects, ParseException e) {
+
+//                // get the container for our fragment from this classes layout
+//                getSupportFragmentManager().findFragmentById(R.id.alert_dialog);
+//                CustomAlert fragmentDemo;
+//                fragmentDemo = new CustomAlert();
+
                 // make sure text objects are valid from server. i.e, There is something there.
-                if(ThisUsersObjects.size()>0 && e==null){
+                if (ThisUsersObjects.size() > 0 && e == null) {
 
                     // for each ParseObject, that we will call "usersRecord" in the ThisUsersObjects ParseObject-List
                     // an object is retrieved from that users set of objects, one object at a time and stored
                     // in usersRecord
-                    for(final ParseObject usersRecord: ThisUsersObjects){
+                    for (final ParseObject usersRecord : ThisUsersObjects) {
 
                         // create a textview that will store the description in code instead of in the xml
                         // once we parse it out from the overall succession of this users objects
@@ -125,7 +131,7 @@ private FrameLayout mDialogLayout;
                             public void done(byte[] data, ParseException e) {
 
                                 // is the retrieved data from the server sound?
-                                if(data != null && e==null){
+                                if (data != null && e == null) {
                                     // byte array data is decoded then stored in bitmap  with: (no decoding,  length variable) as a Bitmap
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
@@ -139,7 +145,7 @@ private FrameLayout mDialogLayout;
                                             ViewGroup.LayoutParams.WRAP_CONTENT); // the ViewGroup is called imageView_params
 
                                     //  now margins are set on the viewgroup
-                                    imageView_params.setMargins(5,0,5,0);
+                                    imageView_params.setMargins(5, 0, 5, 0);
                                     // now the instantiated imageView postImageView is given the same parameters as the view group
                                     postImageView.setLayoutParams(imageView_params);
                                     // the image view is centered
@@ -151,7 +157,7 @@ private FrameLayout mDialogLayout;
                                     // parameters are still needed for the text view imageDescription
                                     LinearLayout.LayoutParams des_params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                             ViewGroup.LayoutParams.WRAP_CONTENT);
-                                    des_params.setMargins(5,5,5,5);
+                                    des_params.setMargins(5, 5, 5, 5);
                                     imageDescription.setLayoutParams(des_params);
                                     imageDescription.setGravity(Gravity.CENTER);
                                     imageDescription.setBackgroundColor(Color.BLUE);
@@ -161,33 +167,32 @@ private FrameLayout mDialogLayout;
                                     // now add the two UI components to the layout
                                     mLinearLayout.addView(imageDescription);
                                     mLinearLayout.addView(postImageView);
+                                    stopTheAlert();
 
                                     // calling a method in CustomAlert.java to cancel the alert
-                                    CustomAlert fragmentDemo = CustomAlert;
-                                    getSupportFragmentManager().findFragmentById(R.id.alert_dialog);
-                                    CustomAlert.doSomething("true");
 
                                 }
-
-
                             }
                         });
+
                     }
-                }else{
+                } else {
                     Toast.makeText(UsersPosts.this, "No photos are accessible " +
                             "via that entry", Toast.LENGTH_SHORT).show();
-                    finish(); // closes this activity and reverts to the UsersTab activity
                 }
-
             }
 
         });
-
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
+    public void stopTheAlert() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
 
+            //finish();
+        }
+    }
 }
+
+
