@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="46dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="39dp"
         android:layout_marginEnd="5dp"
         android:background="#5D66CA"
         android:shadowDy="0"
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassInstagram" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/txtEmailInstagram"
@@ -99,5 +99,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEmailInstagram" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="370dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="26dp"
+        android:hint='new users should fill the fields above, then click "Signup New"'
+        android:inputType="textMultiLine"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassInstagram" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

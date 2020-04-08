@@ -85,11 +85,11 @@
         android:id="@+id/btnInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="156dp"
         android:background="#0097A7"
         android:padding="15dp"
-        android:text="edit profile"
+        android:text="Press: to Submit Edited Profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

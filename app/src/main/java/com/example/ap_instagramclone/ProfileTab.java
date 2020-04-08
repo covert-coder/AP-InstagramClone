@@ -52,7 +52,8 @@ public class ProfileTab extends Fragment {
 
         // retrieve data from server to populate the edtText fields prior to the user submitting new info
         // will be null if any field was not submitted previously or data is missing from server,therefore
-        // all fields in the edit texts are set to blank for resubmission to the server using the onClick
+        // all fields in the edit texts are set to blank text for resubmission to the server using the onClick
+        // user will now get empty fields (not the word null)
         if (parseUser.get("profileName") == null || parseUser.get("Bio")==null || parseUser.get("Profession") == null || parseUser.get("FavouriteSports") == null || parseUser.get("Hobbies") == null ) {
             mEdtProfileName.setText("");
             mEdtProfileName.setText("");
@@ -61,7 +62,7 @@ public class ProfileTab extends Fragment {
             mEdtSports.setText("");
             mEdtHobbies.setText("");
 
-        } else{// populate the edit texts with existing and complete data from the server
+        } else{// instead, populate the edit texts with what data is on the server
             mEdtProfileName.setText(Objects.requireNonNull(parseUser.get("profileName")).toString());
             mEdtBio.setText(Objects.requireNonNull(parseUser.get("Bio")).toString());
             mEdtProfession.setText(Objects.requireNonNull(parseUser.get("Profession")).toString());

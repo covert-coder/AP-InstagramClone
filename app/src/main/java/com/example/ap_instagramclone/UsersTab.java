@@ -1,10 +1,13 @@
 package com.example.ap_instagramclone;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -42,45 +45,32 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        // a new Intent to broadcast to UsersPosts from this class (the getContext())
         Intent intent = new Intent(getContext(), UsersPosts.class);
-        intent.putExtra("username", arrayList.get(position));// putExtra is used when you want to retrieve data from another class or fragment
+        // send the value in the username field of the arrayList, as per the above intent, to UsersPosts with keyword username
+        intent.putExtra("username", arrayList.get(position));// putExtra is used when you want to send data to another class or fragment
                                 // "username" is the key and arrayList.get(position) is the value of that key
                                 // arrayList holds all of the user data such as names,hobbies, etc, as strings, in successive array fields
         // the value, "arrayList.get(position) is passed to UsersPosts.  In UsersPosts, we must now get that value.
         // move to that class to see the code
 
+        // the Intent, called intent, must be started, or nothing will happen
         startActivity(intent);
     }
-
+    // this method is called when the user holds down on the username in the usersTab list of users
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-        // ParseQuery to gain access to ParseUser information (columns). Name of query is parseQuery
-        ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
-
-        // where the "username" on the parse server equals the content in the arrayList at that position
-        parseQuery.whereEqualTo("username", arrayList.get(position));
-
-        // get the data off the parse server
-        parseQuery.getFirstInBackground(new GetCallback<ParseUser>() {
-            @Override
-            public void done(ParseUser ourTargetedUser, ParseException e) {
-                if(ourTargetedUser!=null && e==null){
-
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    // Replace the contents of the container with the new fragment
-                    fragmentTransaction.replace(R.id.alert_dialog, new CustomAlert());
-                    // or ft.add(R.id.your_placeholder, new FooFragment());
-                    // Complete the changes added above
-                    fragmentTransaction.addToBackStack("photoOutput");
-                    fragmentTransaction.commit();
-//                    Toast.makeText(getContext(), ourTargetedUser.get("Profession").toString(),
-//                            Toast.LENGTH_SHORT).show();
-                    //TODO: add a method to launch an alert dialog containing all of the user stats
-                }
-            }
-        });
-
+        // TODO: working on a code block to create a custom notice (alert) containing the
+        // TODO: listed stats for the user (modelling on custom alert in profile tab
+        // this intent is directed to UserStats
+        Intent intent2 = new Intent(getContext(), UserStats.class);
+        // as before, the value from the username field in the array list is sent
+        intent2.putExtra("username", arrayList.get(position));
+        // start this intent.  Notice, it has a different name than the earlier intent with a different target
+        startActivity(intent2);
+        // this method requires a boolean return value
         return true;
     }
 
@@ -132,8 +122,9 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
                             // the parameters of ArrayAdapter are; the context, the line item
                             // designated to populate the array, and the name of our array
                             mAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, arrayList);
-
+                            // get the next username in the database and add it to the list
                             arrayList.add(user.getUsername());
+                            // add a straight line separator on the array list to separate the users visually on the page
                             arrayList.add("______________________________________________");
 
                             // let the adapter know where we are in the list as iteration progresses
@@ -145,12 +136,18 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
                         Toast.makeText(getContext(), "No records to show, or, data retrieval error. " +
                                 "Try again later", Toast.LENGTH_LONG).show();
                     }
-
                 }
-
-
             }
         });
         return view;
+    }
+    public void stopTheAlert() {
+        // get access to the supportFragmentManager
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        // if there is anything in the stack
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            //get the last transaction
+            fragmentManager.popBackStack();
+        }
     }
 }

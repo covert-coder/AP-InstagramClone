@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -33,6 +34,7 @@ public class UsersPosts extends FragmentActivity {
     private LinearLayout mLinearLayout;
     private FrameLayout mDialogLayout;
     private CustomAlert fragmentDemo;
+    private String receivedUsersName;
 
     @SuppressLint("ResourceType")
     @Override
@@ -41,22 +43,22 @@ public class UsersPosts extends FragmentActivity {
         setContentView(R.layout.activity_users_posts);
 
         mLinearLayout = findViewById(R.id.linearLayoutScroll); // assigning a linear layout for storage
-        // of both the photo imageView and the description of the photo imageView
+                            // of both the photo imageView and the description of the photo imageView
 
         // use the data sent from the UsersTab class
         Intent receivedIntentObject = getIntent(); //automatically gets any intent sent to this java class
 
         // store the data associated with the position clicked in the ListArray as "username" regardless of what it may be
-        String receivedUsersName = receivedIntentObject.getStringExtra("username");
+        receivedUsersName = receivedIntentObject.getStringExtra("username");
 
         // set the title of the UsersPosts page to match the user photos accessed
         setTitle(receivedUsersName + "'s pictures");
 
-        // get the parsed data
+        // create a new parse query for a parse object of class photo
         ParseQuery<ParseObject> parseQuery = new ParseQuery<>("Photo");
 
         // parse query where the username key we created, username, which intentionally matches the column name on
-        // the parse server, is equal to whatever was retrieved from the arraylist field
+        // the parse server, is equal to whatever was retrieved from the arraylist field upon click on a field
         // i.e. "where username equals receivedUsersName" is the command being given to the parse server software
         parseQuery.whereEqualTo("username", receivedUsersName);
 
@@ -64,16 +66,14 @@ public class UsersPosts extends FragmentActivity {
         parseQuery.orderByDescending("createdAt");
 
             // TODO create a progressBar to run while the photos download
-            // Begin the transaction
+            // Begin the transaction and access the SupportFragmentManager to do so
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            // Replace the contents of the container with the new fragment
+            // Replace the contents of the container in the layout of this class with the new fragment
         fragmentTransaction.replace(R.id.alert_dialog, new CustomAlert());
-            // or ft.add(R.id.your_placeholder, new FooFragment());
-            // Complete the changes added above
+            // add this transaction to the backstack for later recall
         fragmentTransaction.addToBackStack("photoOutput");
+            // commit the transaction
         fragmentTransaction.commit();
-
-        // TODO move the resource intensive code into an Async method
 
         parseQuery.findInBackground(new FindCallback<ParseObject>() {
             // List<ParseObject> accesses the entire list of objects on the server for a given user
@@ -89,13 +89,13 @@ public class UsersPosts extends FragmentActivity {
                     // in usersRecord
                     for (final ParseObject usersRecord : ThisUsersObjects) {
 
-                        // create a textview that will store the description in code instead of in the xml
+                        // create a textview that will store the description using code rather than xml
                         // once we parse it out from the overall succession of this users objects
                         final TextView imageDescription = new TextView(UsersPosts.this);
 
                         // we have a column called image_des (keyword) in the parse server. imageDescription is
                         // assigned the text-content by using that keyword to parse it from the usersRecord
-                        // if it contains it on that loop.  Looping continues until all objects in the users set are accessed
+                        // if it contains it on that loop.  Looping continues until all objects in that users set are accessed
                         // so eventually, "image_des" keyword is encountered and the description therein is pulled
                         // the retrieved "image_des" content is set as the text for our textView, imageDescription
                         imageDescription.setText(Objects.requireNonNull(usersRecord.get("image_des")).toString());
@@ -104,18 +104,18 @@ public class UsersPosts extends FragmentActivity {
                         // the photo (object associated with "picture" keyword) will be pulled from usersRecord
                         // when encountered, and
                         // stored in a variable called postPicture
-                        // the object retrieved using the "picture" keyword manages to cast to a parse file
+                        // the object retrieved using the "picture" keyword can be, and is, cast to a parse file
                         // called postPicture using: (ParseFile) as casting syntax. It has not yet been
                         // converted to a decoded bitmap
-                        // each picture is thus associated with each description because their retrieval is
-                        // done in one loop
+                        // the picture is thus associated with the description because their retrieval is
+                        // done for one user's data set
                         ParseFile postPicture = (ParseFile) usersRecord.get("picture");
 
                         //looping stops when all objects in ThisUsersObjects have been accessed
                         // we now have content in postPicture (a file called pic.png) specific to this user
                         // and content in imageDescription (text/String) specific to this user
 
-                        // now we retrieve the pic.png files as byte arrays (still in the for loop)
+                        // now we retrieve the pic.png files as byte arrays (we are still in the for loop)
                         // and convert them to bitmaps
                         assert postPicture != null;
                         postPicture.getDataInBackground(new GetDataCallback() {
@@ -161,6 +161,8 @@ public class UsersPosts extends FragmentActivity {
                                     // now add the two UI components to the layout
                                     mLinearLayout.addView(imageDescription);
                                     mLinearLayout.addView(postImageView);
+
+                                    // stop the progress alert because the data has been accessed and loaded
                                     stopTheAlert();
                                 }
                             }
@@ -169,6 +171,7 @@ public class UsersPosts extends FragmentActivity {
                 } else{
                     Toast.makeText(UsersPosts.this, "No photos are accessible " +
                             "via that entry", Toast.LENGTH_SHORT).show();
+                    // stop the alert, because no data will be loaded
                     stopTheAlert();
                 }
             }

@@ -19,7 +19,12 @@ import java.util.Objects;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+
 public class CustomAlert extends Fragment {
+
+    // this fragment is used to produce a custom progress alert with a spinning progress wheel
+    // for use during image download from the UsersTab page
 
     private TextView mTextView1;
     private TextView mTextView2;
