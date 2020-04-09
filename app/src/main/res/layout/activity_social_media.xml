@@ -26,7 +26,7 @@
         android:id="@+id/pager"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#F1EEEE"
+        android:background="#9DACAC"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 

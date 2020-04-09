@@ -125,7 +125,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
                             // get the next username in the database and add it to the list
                             arrayList.add(user.getUsername());
                             // add a straight line separator on the array list to separate the users visually on the page
-                            arrayList.add("______________________________________________");
+                            arrayList.add("_______________________________________");
 
                             // let the adapter know where we are in the list as iteration progresses
                             mAdapter.notifyDataSetChanged();

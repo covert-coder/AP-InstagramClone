@@ -15,20 +15,47 @@ tools:context=".UsersTab" >
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:text="Click on a user name for photos!"
+            android:textAlignment="center"
+            android:textColor="#FFFF00"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:text="Hold a user name for details!"
+            android:textAlignment="center"
+            android:textColor="#FFFF00"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="60dp"
+            android:text="(Scroll for more users)" />
     </FrameLayout>
 
     <ListView
-    android:id="@+id/listView"
-    android:layout_width="409dp"
-    android:layout_height="601dp"
-    android:layout_marginStart="1dp"
-    android:layout_marginTop="1dp"
-    android:layout_marginEnd="1dp"
-    android:layout_marginBottom="1dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" >
-
-    </ListView>
+        android:id="@+id/listView"
+        android:layout_width="369dp"
+        android:layout_height="451dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>

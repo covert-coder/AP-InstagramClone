@@ -44,7 +44,7 @@
             android:gravity="center_horizontal"
             android:text="User Stats"
             android:textColor="@color/colorAccent"
-            android:textSize="24sp"
+            android:textSize="30sp"
             tools:layout_editor_absoluteX="-12dp"
             tools:layout_editor_absoluteY="278dp" />
 
@@ -56,7 +56,8 @@
             android:layout_marginBottom="45dp"
             android:background="@color/colorPrimary"
             android:text="Close"
-            android:textColor="#FFFF" />
+            android:textColor="#FFFF"
+            android:textSize="18sp" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
