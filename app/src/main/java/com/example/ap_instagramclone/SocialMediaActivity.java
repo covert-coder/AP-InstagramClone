@@ -55,7 +55,7 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "On the, other-users page, Hold down on their name to see details. For a quick-pic press the camera icon!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(view, "For a quick-pic press the camera icon!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 
