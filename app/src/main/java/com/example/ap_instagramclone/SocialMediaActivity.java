@@ -32,8 +32,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-public class SocialMediaActivity extends AppCompatActivity implements ProfileTab.OnFragmentInteractionListener,
-        UsersTab.OnFragmentInteractionListener, SharePictureTab.OnFragmentInteractionListener {
+public class SocialMediaActivity extends AppCompatActivity implements ProfileTab_Fragment.OnFragmentInteractionListener,
+        UsersTab.OnFragmentInteractionListener, SharePictureTab_Fragment.OnFragmentInteractionListener {
 
     private Image mImgSharePhoto;
     private ParseObject parseObject;
@@ -47,7 +47,7 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_media);
 
-        setTitle("Instagram Clone Demonstration App!"); // sets the title of the action bar
+        setTitle("Classic Bike Share"); // sets the title of the action bar
         FloatingActionButton floatingActionButton = findViewById(R.id.fab); // assign and instantiate a
                 // circular floating action button (message icon) named fab
 

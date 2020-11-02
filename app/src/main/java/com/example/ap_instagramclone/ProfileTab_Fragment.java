@@ -18,7 +18,7 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 
-public class ProfileTab extends Fragment {
+public class ProfileTab_Fragment extends Fragment {
     private EditText mEdtProfileName;
     private EditText mEdtProfession;
     private EditText mEdtHobbies;
@@ -26,8 +26,8 @@ public class ProfileTab extends Fragment {
     private EditText mEdtBio;
     private Button mBtnSbmtInfo;
 
-    public ProfileTab() {
-        // Required empty public constructor
+    public ProfileTab_Fragment() {
+        // Required empty public constructor with name that must match the class name
     }
 
     interface OnFragmentInteractionListener {

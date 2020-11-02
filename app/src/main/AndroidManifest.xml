@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UsersPosts"></activity>
+        <activity android:name=".Users_Posts_Fragment"></activity>
         <activity android:name=".InstagramCloneMainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserStats"/>
-        <activity android:name=".UsersTab"/>
         <activity android:name=".SocialMediaActivity" />
         <activity android:name=".InstagramCloneLoginPage" />
         <meta-data

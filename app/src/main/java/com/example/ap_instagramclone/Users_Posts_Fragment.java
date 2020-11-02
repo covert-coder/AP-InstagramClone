@@ -29,7 +29,7 @@ import com.parse.ParseQuery;
 import java.util.List;
 import java.util.Objects;
 
-public class UsersPosts extends FragmentActivity {
+public class Users_Posts_Fragment extends FragmentActivity {
 
     private LinearLayout mLinearLayout;
     private FrameLayout mDialogLayout;
@@ -91,7 +91,7 @@ public class UsersPosts extends FragmentActivity {
 
                         // create a textview that will store the description using code rather than xml
                         // once we parse it out from the overall succession of this users objects
-                        final TextView imageDescription = new TextView(UsersPosts.this);
+                        final TextView imageDescription = new TextView(Users_Posts_Fragment.this);
 
                         // we have a column called image_des (keyword) in the parse server. imageDescription is
                         // assigned the text-content by using that keyword to parse it from the usersRecord
@@ -130,7 +130,7 @@ public class UsersPosts extends FragmentActivity {
                                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
                                     // create an image view in the layout using code, called postImageView (instance of ImageView)
-                                    ImageView postImageView = new ImageView(UsersPosts.this);
+                                    ImageView postImageView = new ImageView(Users_Posts_Fragment.this);
 
                                     // below, we set all of the parameters for our ImageView that would ordinarily be in the layout file
                                     // here we create a ViewGroup with parameters that match the parent and wrap content (width and height);
@@ -169,7 +169,7 @@ public class UsersPosts extends FragmentActivity {
                         });
                     }
                 } else{
-                    Toast.makeText(UsersPosts.this, "No photos are accessible " +
+                    Toast.makeText(Users_Posts_Fragment.this, "No photos are accessible " +
                             "via that entry", Toast.LENGTH_SHORT).show();
                     // stop the alert, because no data will be loaded
                     stopTheAlert();

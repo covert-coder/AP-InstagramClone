@@ -26,7 +26,7 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instagram_clone_login_page);
 
-        setTitle("Login to Instagram");
+        setTitle("Login to Classic Bike Share");
 
 
         txtEmailOnfile = findViewById(R.id.txtEmailExist);

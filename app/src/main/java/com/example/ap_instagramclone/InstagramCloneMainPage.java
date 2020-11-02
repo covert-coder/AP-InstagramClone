@@ -30,7 +30,7 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
 
         ParseUser.getCurrentUser();
         ParseUser.logOut();
-        setTitle("Sign Up for Instagram"); // sets the title in the action bar for this main page
+        setTitle("Sign Up for Classic Bike Share"); // sets the title in the action bar for this main page
 
         // logout any user that is logged in
         if (ParseUser.getCurrentUser() != null) {
@@ -76,7 +76,6 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
             // and generating a progress dialog
             // plus error checking
             case R.id.btnSignupInstagram:
-
 
                 final ParseUser appUser = new ParseUser();
                 appUser.setUsername(mUserNameInstag.getText().toString());

@@ -23,8 +23,8 @@ tools:context=".UsersTab" >
             android:layout_marginTop="15dp"
             android:text="Click on a user name for photos!"
             android:textAlignment="center"
-            android:textColor="#FFFF00"
-            android:textSize="18sp" />
+            android:textColor="#ffff"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -34,8 +34,8 @@ tools:context=".UsersTab" >
             android:layout_marginTop="60dp"
             android:text="Hold a user name for details!"
             android:textAlignment="center"
-            android:textColor="#FFFF00"
-            android:textSize="18sp" />
+            android:textColor="#ffff"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/textView6"

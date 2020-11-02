@@ -47,7 +47,7 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
         // a new Intent to broadcast to UsersPosts from this class (the getContext())
-        Intent intent = new Intent(getContext(), UsersPosts.class);
+        Intent intent = new Intent(getContext(), Users_Posts_Fragment.class);
         // send the value in the username field of the arrayList, as per the above intent, to UsersPosts with keyword username
         intent.putExtra("username", arrayList.get(position));// putExtra is used when you want to send data to another class or fragment
                                 // "username" is the key and arrayList.get(position) is the value of that key

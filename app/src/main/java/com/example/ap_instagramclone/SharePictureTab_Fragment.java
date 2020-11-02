@@ -37,7 +37,7 @@ import javax.security.auth.login.LoginException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SharePictureTab extends Fragment implements View.OnClickListener {
+public class SharePictureTab_Fragment extends Fragment implements View.OnClickListener {
     private Button mBtnShareImg;
     private EditText mEditImgDescription;
     private ImageView mImgShare;
@@ -91,7 +91,7 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-    public SharePictureTab() {
+    public SharePictureTab_Fragment() {
         // Required empty public constructor
     }
     public interface OnFragmentInteractionListener{
@@ -105,8 +105,8 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
             mBtnShareImg = view.findViewById(R.id.btnShare);
             mEditImgDescription = view.findViewById(R.id.edtImageDescrip);
             mImgShare = view.findViewById(R.id.imgPlace);
-            mImgShare.setOnClickListener(SharePictureTab.this);
-            mBtnShareImg.setOnClickListener(SharePictureTab.this);
+            mImgShare.setOnClickListener(SharePictureTab_Fragment.this);
+            mBtnShareImg.setOnClickListener(SharePictureTab_Fragment.this);
 
             mProgressBar = view.findViewById(R.id.picPostProgress);
             mProgressBar.setVisibility(View.INVISIBLE);

@@ -25,13 +25,13 @@ public class tabAdapter extends FragmentPagerAdapter {
         switch (position) { // similar to if stmt
 
             case 0: // ranks the tab as first in line (furthest to left on action bar)
-                return new ProfileTab(); // returns the ProfileTab fragment to the method in response to selection of tab 1
+                return new ProfileTab_Fragment(); // returns the ProfileTab fragment to the method in response to selection of tab 1
 
             case 1:
                 return new UsersTab();
 
             case 2:
-                return new SharePictureTab();
+                return new SharePictureTab_Fragment();
             default:
                 return null;
         }
@@ -48,7 +48,7 @@ public class tabAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Other Users";
             case 2:
-                return "Share Pictures";
+                return "Share Pictures of Your Bikes";
             default:
                 return null;
         }
