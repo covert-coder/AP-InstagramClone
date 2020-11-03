@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserStats"/>
+        <activity android:name=".Users_Posts"/>
         <activity android:name=".SocialMediaActivity" />
         <activity android:name=".InstagramCloneLoginPage" />
         <meta-data
