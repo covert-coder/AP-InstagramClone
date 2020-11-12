@@ -43,7 +43,7 @@ public class CustomAlert extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_alert_custom, container, false);
 
-        Intent intent = new Intent(getContext(), Users_Posts_Fragment.class);
+        Intent intent = new Intent(getContext(), Users_Posts.class);
         mProgressBar = view.findViewById(R.id.progressBar2);
         mProgressBar = new ProgressBar(getContext());
         mProgressBar.setVisibility(View.VISIBLE);

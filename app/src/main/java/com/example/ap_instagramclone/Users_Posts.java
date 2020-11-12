@@ -29,6 +29,8 @@ import com.parse.ParseQuery;
 import java.util.List;
 import java.util.Objects;
 
+// this class receives output from the UsersTab class (a fragment) and thus must extend FragmentActivity
+// rather than AppCompatActivity.
 public class Users_Posts extends FragmentActivity {
 
     private LinearLayout mLinearLayout;
