@@ -31,6 +31,8 @@
 
     <string name="to_share_your_image_first_add_a_description_then_click_on_the_image_above">to share your image, first add a description, then click on the image above</string>
     <string name="logout">Logout</string>
+    <string name="btn_View_your_album">View Your Personal Album</string>
+    <string name="post_your_image">Post Your Image</string>
 
 
 </resources>

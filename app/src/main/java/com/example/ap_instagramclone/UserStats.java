@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -61,6 +62,10 @@ public class UserStats extends AppCompatActivity {
 +                            ourTargetedUser.get("Hobbies").toString() +
                             "\n" + "\n" +"Favourite Sports: "+ ourTargetedUser.get("FavouriteSports").toString() +
                             "\n" +"\n" + "Profession: " + ourTargetedUser.get("Profession").toString());
+                }
+                else {
+                    Toast.makeText(UserStats.this, "this user does not have a profile", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

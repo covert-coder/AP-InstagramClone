@@ -46,13 +46,14 @@ public class SharePictureTab_Fragment extends Fragment implements View.OnClickLi
     private Bitmap bitmap;
     private byte[] bytes;
     ByteArrayOutputStream byteArrayOutputStream;
+    private Button mBtnViewAlbum;
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
+            // in this first case, the user has clicked on the placeholder image of this layout to add an image
             case R.id.imgPlace:
 
-                // first this if stmt checks to see if permission has been previously granted
+                // first this if stmt checks to see if permission has been previously granted to access the pictures on the phone
                 // if it has, this is stored in,
                 if (android.os.Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()),
                         Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -67,27 +68,42 @@ public class SharePictureTab_Fragment extends Fragment implements View.OnClickLi
                     getChosenImage();
                 }
                 break;
-
+            // in this second case, the user has now hit the "Post Your Image" button and, we check,
+            // have they selected an image from their phone and added a description to the description field
             case R.id.btnShare:
 
                 mProgressBar.setVisibility(View.VISIBLE);
 
                 // confirming there is an image using; if the image has any size to it, (i.e., exists)
-                if(bitmap != null){
+                if (bitmap != null) {
 
                     // check to see if the description was filled out. An empty string will indicate it wasn't.
-                    if(mEditImgDescription.getText().toString().equals("")){
+                    if (mEditImgDescription.getText().toString().equals("")) {
                         Toast.makeText(getContext(), "You need to add a description before submission", Toast.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         // call an off thread method to prevent slowing, lagging, or hanging of UI such as progress bar
                         // AsyncTask method contains, file compression, parse commands/puts and save
                         AsyncTask progressBar = new progressBar().execute();
                         mProgressBar.setVisibility(View.VISIBLE);
                     }
-                }else {
+                } else {
                     Toast.makeText(getContext(), "You must select an image by clicking on the image " +
                             "above before posting your image", Toast.LENGTH_LONG).show();
+                    Log.i("myTag", "description was not included");
+
                 }
+                break;
+
+            // in this third case, the button has been clicked for the user to view their personal online album
+            case R.id.btnViewYourAlbum:
+
+                Users_Posts thisUsersPosts = new Users_Posts();
+                // create an intent to send to Users_Posts to access the images for users
+                Intent thisIntent = new Intent(getContext(), Users_Posts.class);
+                // as the "username" send the current users name
+                thisIntent.putExtra("username", ParseUser.getCurrentUser().getUsername());
+                // start the intent
+                startActivity(thisIntent);
                 break;
         }
     }
@@ -107,6 +123,8 @@ public class SharePictureTab_Fragment extends Fragment implements View.OnClickLi
             mImgShare = view.findViewById(R.id.imgPlace);
             mImgShare.setOnClickListener(SharePictureTab_Fragment.this);
             mBtnShareImg.setOnClickListener(SharePictureTab_Fragment.this);
+            mBtnViewAlbum = view.findViewById(R.id.btnViewYourAlbum);
+            mBtnViewAlbum.setOnClickListener(SharePictureTab_Fragment.this);
 
             mProgressBar = view.findViewById(R.id.picPostProgress);
             mProgressBar.setVisibility(View.INVISIBLE);
