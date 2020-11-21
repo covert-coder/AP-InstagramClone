@@ -96,9 +96,9 @@ public class SharePictureTab_Fragment extends Fragment implements View.OnClickLi
 
             // in this third case, the button has been clicked for the user to view their personal online album
             case R.id.btnViewYourAlbum:
-
+                // created an instance of Users_Posts to access that classes methods
                 Users_Posts thisUsersPosts = new Users_Posts();
-                // create an intent to send to Users_Posts to access the images for users
+                // created an intent to send to Users_Posts to access the images for users
                 Intent thisIntent = new Intent(getContext(), Users_Posts.class);
                 // as the "username" send the current users name
                 thisIntent.putExtra("username", ParseUser.getCurrentUser().getUsername());

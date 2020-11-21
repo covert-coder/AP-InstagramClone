@@ -67,9 +67,9 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
         //xml file activity_social_media.xml
         // it is a child of the AppBarLayout in the same file and appears as a view in the app bar
         // add tabs to tabLayout
-        tabLayout.addTab(tabLayout.newTab().setText("My Profile"));
-        tabLayout.addTab(tabLayout.newTab().setText("Other Users"));
-        tabLayout.addTab(tabLayout.newTab().setText("Picture Share"));
+        tabLayout.addTab(tabLayout.newTab().setText("My Classic Bike Share Profile"));
+        tabLayout.addTab(tabLayout.newTab().setText("Other Club  Users"));
+        tabLayout.addTab(tabLayout.newTab().setText("Classic Bike Picture Share"));
         // the ViewPager handles scrolling/sliding of pages, is a member of the View superclass
         // a pager adapter is assigned to this View class that is responsible for handling the fragments (tabs)
         // pager is the name assigned to the ViewPager in the activity_social_media xml layout

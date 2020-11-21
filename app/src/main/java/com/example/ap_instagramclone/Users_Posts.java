@@ -1,25 +1,25 @@
 package com.example.ap_instagramclone;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -37,15 +37,18 @@ public class Users_Posts extends FragmentActivity {
     private FrameLayout mDialogLayout;
     private CustomAlert fragmentDemo;
     private String receivedUsersName;
+    // TODO check if this is needed
+    private ImageView deletePic; // used to house an image of a delete icon
+    private String pictureIdentifier;
 
     @SuppressLint("ResourceType")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_posts);
 
         mLinearLayout = findViewById(R.id.linearLayoutScroll); // assigning a linear layout for storage
-                            // of both the photo imageView and the description of the photo imageView
+        // of both the photo imageView and the description of the photo imageView
 
         // use the data sent from the UsersTab class
         Intent receivedIntentObject = getIntent(); //automatically gets any intent sent to this java class
@@ -67,19 +70,20 @@ public class Users_Posts extends FragmentActivity {
         // then sort the results by date/time submitted to the server
         parseQuery.orderByDescending("createdAt");
 
-            // TODO create a progressBar to run while the photos download
-            // Begin the transaction and access the SupportFragmentManager to do so
+        // TODO create a progressBar to run while the photos download
+        // Begin the transaction and access the SupportFragmentManager to do so
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            // Replace the contents of the container in the layout of this class with the new fragment
+        // Replace the contents of the container in the layout of this class with the new fragment
         fragmentTransaction.replace(R.id.alert_dialog, new CustomAlert());
-            // add this transaction to the backstack for later recall
+        // add this transaction to the backstack for later recall
         fragmentTransaction.addToBackStack("photoOutput");
-            // commit the transaction
+        // commit the transaction
         fragmentTransaction.commit();
 
         parseQuery.findInBackground(new FindCallback<ParseObject>() {
             // List<ParseObject> accesses the entire list of objects on the server for a given user
-            // and, our query was restricted to only one user so the objects are for that user only
+            // and, our query was restricted to only one user, the one clicked, so the objects are
+            // for that user only
             @Override
             public void done(List<ParseObject> ThisUsersObjects, ParseException e) {
 
@@ -129,25 +133,31 @@ public class Users_Posts extends FragmentActivity {
                                 // is the retrieved data from the server sound?
                                 if (data != null && e == null) {
                                     // byte array data is decoded then stored in bitmap  with: (no decoding,  length variable) as a Bitmap
-                                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                    Bitmap retrievedBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
                                     // create an image view in the layout using code, called postImageView (instance of ImageView)
                                     ImageView postImageView = new ImageView(Users_Posts.this);
+                                    // TODO check to see if this works
+                                    // we create an instance of the deletePic icon with each loop of this for loop
 
                                     // below, we set all of the parameters for our ImageView that would ordinarily be in the layout file
                                     // here we create a ViewGroup with parameters that match the parent and wrap content (width and height);
                                     // that parent being the linear layout in the activity_users_posts layout)
                                     LinearLayout.LayoutParams imageView_params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                                             ViewGroup.LayoutParams.WRAP_CONTENT); // the ViewGroup is called imageView_params
+                                    // TODO create layout parameters for the FAB
 
                                     //  now margins are set on the viewgroup
                                     imageView_params.setMargins(5, 0, 5, 0);
                                     // now the instantiated imageView postImageView is given the same parameters as the view group
+
                                     postImageView.setLayoutParams(imageView_params);
-                                    // the image view is centered
+
+                                    // the image view is set to the left margin
                                     postImageView.setScaleType(ImageView.ScaleType.FIT_START);
                                     // and the contents of the imageview are set to the bitmap retrieved from the parse server
-                                    postImageView.setImageBitmap(bitmap);
+                                    postImageView.setImageBitmap(retrievedBitmap);
+                                    // image view is set to adjust its bounds to preserve the aspect ratio of it's drawable
                                     postImageView.setAdjustViewBounds(true);
 
                                     // parameters are still needed for the text view imageDescription
@@ -160,7 +170,7 @@ public class Users_Posts extends FragmentActivity {
                                     imageDescription.setTextColor(Color.WHITE);
                                     imageDescription.setTextSize(24f);
 
-                                    // now add the two UI components to the layout
+                                    // now add the three UI components to the layout
                                     mLinearLayout.addView(imageDescription);
                                     mLinearLayout.addView(postImageView);
 
@@ -170,7 +180,7 @@ public class Users_Posts extends FragmentActivity {
                             }
                         });
                     }
-                } else{
+                } else {
                     Toast.makeText(Users_Posts.this, "No photos are accessible " +
                             "via that entry", Toast.LENGTH_SHORT).show();
                     // stop the alert, because no data will be loaded
@@ -179,6 +189,7 @@ public class Users_Posts extends FragmentActivity {
             }
         });
     }
+
     public void stopTheAlert() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
@@ -186,5 +197,4 @@ public class Users_Posts extends FragmentActivity {
         }
     }
 }
-
 

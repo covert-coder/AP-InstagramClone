@@ -9,14 +9,14 @@
 
     <ImageView
         android:id="@+id/imgPlace"
-        android:layout_width="430dp"
-        android:layout_height="215dp"
+        android:layout_width="340dp"
+        android:layout_height="170dp"
         android:layout_marginTop="16dp"
         android:hapticFeedbackEnabled="true"
-        android:src="@drawable/placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bike_drawing" />
 
     <EditText
         android:id="@+id/edtImageDescrip"

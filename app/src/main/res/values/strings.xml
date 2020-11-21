@@ -33,6 +33,9 @@
     <string name="logout">Logout</string>
     <string name="btn_View_your_album">View Your Personal Album</string>
     <string name="post_your_image">Post Your Image</string>
+    <string name="click_on_a_user_name_for_photos">Click on a user name for photos!</string>
+    <string name="hold_a_user_name_for_details">Hold a user name for details!</string>
+    <string name="scroll_for_more_users">(Scroll for more users)</string>
 
 
 </resources>
