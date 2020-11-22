@@ -141,11 +141,13 @@ public class UsersTab extends Fragment implements AdapterView.OnItemClickListene
                             // visually on the page
                             arrayList.add("_______________________________________");
 
+
                             // let the adapter know where we are in the list as iteration progresses
                             mAdapter.notifyDataSetChanged();
                         }
                         // set the adapter to our ListView, mListView so we can see the list on the
                         // screen(ListView)
+
                         mListView.setAdapter(mAdapter);
                     }else{
                         Toast.makeText(getContext(), "No records to show, or, data retrieval error. " +

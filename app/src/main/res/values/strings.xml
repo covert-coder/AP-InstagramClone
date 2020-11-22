@@ -36,6 +36,13 @@
     <string name="click_on_a_user_name_for_photos">Click on a user name for photos!</string>
     <string name="hold_a_user_name_for_details">Hold a user name for details!</string>
     <string name="scroll_for_more_users">(Scroll for more users)</string>
+    <string name="please_enter_a_password">Please enter a password</string>
+    <string name="signup_new2">Signup New</string>
+    <string name="please_enter_an_email">Please enter an email</string>
+    <string name="user_login">User Login</string>
+    <string name="please_enter_a_username">Please enter a username</string>
+    <string name="new_users_should_fill_the_fields_above_then_click_signup_new">new users should fill the fields above, then click Signup New</string>
+    <string name="press_here_to_submit_edited_profile">Press here: to Submit Edited Profile</string>
 
 
 </resources>
