@@ -43,6 +43,8 @@
     <string name="please_enter_a_username">Please enter a username</string>
     <string name="new_users_should_fill_the_fields_above_then_click_signup_new">new users should fill the fields above, then click Signup New</string>
     <string name="press_here_to_submit_edited_profile">Press here: to Submit Edited Profile</string>
+    <string name="Bio">\"Bio: \"</string>
+    <string name="profile_named">Profile Name:</string>
 
 
 </resources>

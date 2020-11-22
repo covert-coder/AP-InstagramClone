@@ -64,11 +64,11 @@ public class ProfileTab_Fragment extends Fragment {
             mEdtHobbies.setText("");
 
         } else{// instead, populate the edit texts with what data is on the server
-            mEdtProfileName.setText(Objects.requireNonNull("Profile Name: "+ parseUser.get("profileName")).toString());
-            mEdtBio.setText("Bio: "+ Objects.requireNonNull(parseUser.get("Bio")).toString());
-            mEdtProfession.setText("Profession: "+ Objects.requireNonNull(parseUser.get("Profession")).toString());
-            mEdtSports.setText("Favourite Sports: " + Objects.requireNonNull(parseUser.get("FavouriteSports")).toString());
-            mEdtHobbies.setText("Hobbies: " + Objects.requireNonNull(parseUser.get("Hobbies")).toString());
+            mEdtProfileName.setText(Objects.requireNonNull(parseUser.get("profileName")).toString());
+            mEdtBio.setText(Objects.requireNonNull(parseUser.get("Bio")).toString());
+            mEdtProfession.setText(Objects.requireNonNull(parseUser.get("Profession")).toString());
+            mEdtSports.setText(Objects.requireNonNull(parseUser.get("FavouriteSports")).toString());
+            mEdtHobbies.setText(Objects.requireNonNull(parseUser.get("Hobbies")).toString());
 
         }
             // onClick for data submission from form with check for completion

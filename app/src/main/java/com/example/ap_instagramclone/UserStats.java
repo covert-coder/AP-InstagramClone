@@ -58,9 +58,9 @@ public class UserStats extends AppCompatActivity {
             public void done(ParseUser ourTargetedUser, ParseException e) {
                 if (ourTargetedUser != null && e == null) {
                     // set the output to the TextView to show the user the stats for this user selected
-                    userStats.setText("Username: "+ ourTargetedUser.get("username").toString() + "\n" +"\n" + "Hobbies: "
+                    userStats.setText("Username: "+ ourTargetedUser.get("username").toString() + "\n" +"\n" + "Bikes You Own: "
 +                            ourTargetedUser.get("Hobbies").toString() +
-                            "\n" + "\n" +"Favourite Sports: "+ ourTargetedUser.get("FavouriteSports").toString() +
+                            "\n" + "\n" +"Bikes You Want to Have: "+ ourTargetedUser.get("FavouriteSports").toString() +
                             "\n" +"\n" + "Profession: " + ourTargetedUser.get("Profession").toString());
                 }
                 else {
