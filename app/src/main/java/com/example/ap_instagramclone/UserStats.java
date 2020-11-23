@@ -29,7 +29,8 @@ public class UserStats extends AppCompatActivity {
         // directed at this class.  In this case, from UsersTab.java, long-click method.
         Bundle extras = getIntent().getExtras();
         // pull the string from the extra put with the key name "username". This is the value of the
-        // object in the ListArray from the UsersTab.  It will also be the username of that user in the database.
+        // object in the ListArray from the UsersTab.  It will also be the username of that user
+        // in the database.
         String receivedUsersName2 = extras.getString("username");
 
         userStats = findViewById(R.id.txtUserStats);
@@ -40,7 +41,8 @@ public class UserStats extends AppCompatActivity {
             public void onClick(View v) {
                 // end this activity
                 finish();
-                // assign and start the socialMediaActivity (was unable to start UsersTab)(cannot cast to Activity class)
+                // assign and start the socialMediaActivity (was unable to start UsersTab)(cannot
+                // cast to Activity class)
                 Intent intent3 = new Intent(UserStats.this, SocialMediaActivity.class);
                 startActivity(intent3);
             }
@@ -58,13 +60,17 @@ public class UserStats extends AppCompatActivity {
             public void done(ParseUser ourTargetedUser, ParseException e) {
                 if (ourTargetedUser != null && e == null) {
                     // set the output to the TextView to show the user the stats for this user selected
-                    userStats.setText("Username: "+ ourTargetedUser.get("username").toString() + "\n" +"\n" + "Bikes You Own: "
+                    userStats.setText(getString(R.string.users_name)+ ourTargetedUser.get("username").
+                            toString() + "\n" +"\n" + getString(R.string.bikes_that_you_own)
 +                            ourTargetedUser.get("Hobbies").toString() +
-                            "\n" + "\n" +"Bikes You Want to Have: "+ ourTargetedUser.get("FavouriteSports").toString() +
-                            "\n" +"\n" + "Profession: " + ourTargetedUser.get("Profession").toString());
+                            "\n" + "\n" +getString(R.string.bikes_you_want_to_have)+ ourTargetedUser.get
+                            ("FavouriteSports").toString() +
+                            "\n" +"\n" + getString(R.string.profession) + ourTargetedUser.get
+                            ("Profession").toString());
                 }
                 else {
-                    Toast.makeText(UserStats.this, "this user does not have a profile", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserStats.this, "this user does not have a profile",
+                            Toast.LENGTH_SHORT).show();
 
                 }
             }

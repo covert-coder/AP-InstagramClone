@@ -28,12 +28,14 @@
         android:id="@+id/imageView2"
         android:layout_width="115dp"
         android:layout_height="138dp"
+        android:layout_marginTop="16dp"
         android:background="#818283"
+        android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bike_drawing"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/bike_drawing" />
 
     <Button
         android:id="@+id/btnSignupInstagram"
@@ -57,6 +59,7 @@
         android:id="@+id/txtEmailInstagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="#FFFF"
         android:ems="10"
         android:hint="@string/please_enter_an_email"
@@ -68,7 +71,7 @@
         android:textColorHint="#070707"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnLoginInstagram"

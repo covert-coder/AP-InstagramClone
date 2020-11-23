@@ -45,6 +45,26 @@
     <string name="press_here_to_submit_edited_profile">Press here: to Submit Edited Profile</string>
     <string name="Bio">\"Bio: \"</string>
     <string name="profile_named">Profile Name:</string>
+    <string name="users_name">\"Username: \"</string>
+    <string name="bikes_you_want_to_have">\"Bikes or Parts Sought: \"</string>
+    <string name="profession">\"Profession: \"</string>
+    <string name="bikes_that_you_own">\"Bikes Owned: \"</string>
+    <string name="bikes_you_own">Bikes owned</string>
+    <string name="bikes_you_are_seeking">bikes or parts  sought</string>
+    <string name="all_fields_are_requiredtext">(all fields are required)</string>
+    <string name="bio">Bio:</string>
+    <string name="Profession">Profession</string>
+    <string name="Your_bio">Your Bio</string>
+
+    <string name="todo">TODO</string>
+    <string name="logo">logo</string>
+    <string name="data_is_loading">Data is Loading</string>
+    <string name="please_wait">Please Wait</string>
+    <string name="close">Close</string>
+    <string name="user_stats">User Stats</string>
+    <string name="floating_action">floating_action</string>
+
+    <string name="user_Login">user login</string>
 
 
 </resources>
