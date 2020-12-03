@@ -26,13 +26,13 @@
         android:layout_marginTop="32dp"
         android:background="@color/cardview_light_background"
         android:ems="10"
-        android:hint="@string/please_enter_email"
+        android:hint="@string/please_enter_your_login"
+        android:importantForAutofill="no"
         android:inputType="textAutoComplete|textEmailAddress"
         android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <EditText
         android:id="@+id/txtPassExist"
@@ -53,14 +53,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="5dp"
         android:background="#646768"
-        android:text="@string/user_Login"
+        android:text="@string/login"
         android:textColor="#090909"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassExist" />
 
@@ -69,7 +69,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:background="#333B3E"
         android:text="@string/signup_new"
@@ -77,6 +77,20 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/or_goto"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLoginExisting" />
 

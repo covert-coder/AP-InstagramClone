@@ -75,17 +75,17 @@
         android:layout_width="0dp"
         android:layout_height="43dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="5dp"
         android:background="#25252B"
         android:shadowDy="0"
-        android:text="@string/user_login"
+        android:text="@string/login"
         android:textColor="#FFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignupInstagram" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <EditText
         android:id="@+id/txtUserInstagram"
@@ -116,5 +116,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPassInstagram" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/or_goto_login"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignupInstagram" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

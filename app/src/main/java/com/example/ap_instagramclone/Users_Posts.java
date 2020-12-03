@@ -34,12 +34,8 @@ import java.util.Objects;
 public class Users_Posts extends FragmentActivity {
 
     private LinearLayout mLinearLayout;
-    private FrameLayout mDialogLayout;
-    private CustomAlert fragmentDemo;
-    private String receivedUsersName;
     // TODO check if this is needed
-    private ImageView deletePic; // used to house an image of a delete icon
-    private String pictureIdentifier;
+
 
     @SuppressLint("ResourceType")
     @Override
@@ -54,7 +50,7 @@ public class Users_Posts extends FragmentActivity {
         Intent receivedIntentObject = getIntent(); //automatically gets any intent sent to this java class
 
         // store the data associated with the position clicked in the ListArray as "username" regardless of what it may be
-        receivedUsersName = receivedIntentObject.getStringExtra("username");
+        String receivedUsersName = receivedIntentObject.getStringExtra("username");
 
         // set the title of the UsersPosts page to match the user photos accessed
         setTitle(receivedUsersName + "'s pictures");
@@ -189,7 +185,6 @@ public class Users_Posts extends FragmentActivity {
             }
         });
     }
-
     public void stopTheAlert() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {

@@ -18,7 +18,7 @@
     <string name="all_fields_are_required">all fields are required</string>
     <string name="please_enter_email">Please enter email</string>
     <string name="please_enter_password">Please enter password</string>
-    <string name="login">Login</string>
+
     <string name="signup_new">signup new</string>
     <string name="or">or</string>
     <string name="instagram_logo">Instagram Logo</string>
@@ -65,6 +65,9 @@
     <string name="floating_action">floating_action</string>
 
     <string name="user_Login">user login</string>
-
+    <string name="please_enter_your_login">please enter your login</string>
+    <string name="login">Login</string>
+    <string name="or_goto">or, goto</string>
+    <string name="or_goto_login">or, goto Login</string>
 
 </resources>

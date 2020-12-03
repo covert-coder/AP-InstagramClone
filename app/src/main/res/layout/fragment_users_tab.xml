@@ -44,7 +44,7 @@
             android:id="@+id/textView4"
             android:layout_width="392dp"
             android:layout_height="78dp"
-            android:layout_gravity="center_horizontal|left"
+            android:layout_gravity="start|center_horizontal"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="32dp"
             android:foregroundGravity="top"
