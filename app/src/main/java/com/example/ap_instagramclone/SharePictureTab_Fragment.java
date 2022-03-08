@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,12 +23,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.parse.Parse;
+
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Objects;
@@ -43,6 +45,7 @@ public class SharePictureTab_Fragment extends Fragment implements View.OnClickLi
     private ImageView mImgShare;
     private ProgressBar mProgressBar;
     private ParseObject parseObject;
+
     private Bitmap bitmap;
     private byte[] bytes;
     ByteArrayOutputStream byteArrayOutputStream;
@@ -53,16 +56,18 @@ public class SharePictureTab_Fragment extends Fragment implements View.OnClickLi
             // in this first case, the user has clicked on the placeholder image of this layout to add an image
             case R.id.imgPlace:
 
-                // first this if stmt checks to see if permission has been previously granted to access the pictures on the phone
+                // first, this if stmt checks to see if permission has been previously granted to
+                // access the pictures on the phone
                 // if it has, this is stored in,
-                if (android.os.Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(Objects.requireNonNull(getContext()),
+                if (android.os.Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission
+                        (Objects.requireNonNull(getContext()),
                         Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
                     // body of if stmt
                     requestPermissions(new String[]{
                                     Manifest.permission.READ_EXTERNAL_STORAGE
                             }
-                            , 1000); // we have created this code number, which will be stored int
+                            , 1000); // we have created this code number, which will be stored in
                     // the manifest as a unique identifier of this READ_EXTERNAL_STORAGE request
                 } else {
                     getChosenImage();
@@ -232,13 +237,17 @@ public class SharePictureTab_Fragment extends Fragment implements View.OnClickLi
                         Toast.makeText(getContext(), "Your image has been posted to the server", Toast.LENGTH_LONG).show();
 
                         mProgressBar.setVisibility(View.GONE);
+                       mImgShare.setImageResource (R.drawable.bike_drawing);
+
+                       mEditImgDescription.setText(R.string.blank);
+
+
                     } else {
                         Toast.makeText(getContext(), "Error :" + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
-
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);

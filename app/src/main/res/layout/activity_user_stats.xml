@@ -32,8 +32,10 @@
             android:layout_marginStart="20dp"
             android:ems="10"
             android:inputType="textMultiLine"
+            android:minHeight="48dp"
             android:textColor="#FFFF"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/textView"

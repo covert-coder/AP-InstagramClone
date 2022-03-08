@@ -68,7 +68,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="44dp"
         android:background="@android:color/holo_orange_light"
         android:text="@string/btn_View_your_album"
         app:layout_constraintEnd_toEndOf="parent"

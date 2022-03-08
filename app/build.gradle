@@ -28,17 +28,27 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation "com.github.parse-community.Parse-SDK-Android:parse:1.18.5"
+    //implementation "com.github.parse-community.Parse-SDK-Android:parse:1.18.5"
+    //implementation "com.github.parse-community.Parse-SDK-Android:parse:1.18.5"
     implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.github.parse-community.Parse-SdK-Android:parse:1.18.5'
+    implementation 'com.github.parse-community.Parse-SDK-Android:bolts-tasks:3.0.0'
+//    compile 'com.parse.bolts:bolts-android:1.2.1'
+//    compile 'com.parse:parse-android:1.10.3'
+//    compile project(':ParseUI-Widget')
 }
 repositories {
-    mavenCentral()
-    google()
-    jcenter()
-    maven { url 'https://jitpack.io' }
-}
+//    mavenCentral()
+//    google()
+//    jcenter()
+
+       // content {
+           // includeModule("org.jetbrains.kotlinx", "kotlinx-collections-immutable-jvm")
+        //}
+    }
 allprojects {
-    gradle.projectsEvaluated {
+
+        gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
