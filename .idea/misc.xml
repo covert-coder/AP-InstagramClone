@@ -3,9 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout-land/activity_classicbikeshare_login.xml" value="0.15765765765765766" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout-land/activity_user_stats.xml" value="0.15765765765765766" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout-land/fragment_profile_tab.xml" value="0.15765765765765766" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout-land/fragment_share_picture_tab.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/activity_classicbikeshare_login.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/activity_classicbikeshare_main.xml" value="1.0" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/activity_instagram_clone_login_page.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/activity_social_media.xml" value="0.1" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/activity_user_stats.xml" value="0.1" />
-        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/fragment_share_picture_tab.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/activity_users_posts.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/fragment_alert_custom.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/fragment_profile_tab.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/fragment_share_picture_tab.xml" value="0.33" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/layout/mytoolbar.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/APInstagramClone/app/src/main/res/menu/my_menu.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/activity_classicbikeshare_login.xml" value="0.1398148148148148" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/activity_classicbikeshare_main.xml" value="0.33" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/activity_classicbikeshare_signup.xml" value="0.18" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/activity_classicbikeshare_login.xml" value="0.22" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/activity_classicbikeshare_main.xml" value="0.14" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/activity_classicbikeshare_signup.xml" value="0.22" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/fragment_profile_tab.xml" value="0.33" />
       </map>
     </option>
   </component>

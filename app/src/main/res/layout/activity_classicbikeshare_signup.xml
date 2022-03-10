@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8D94A3"
-    android:onClick="rootLayoutLoginPageTapped"
-    tools:context=".InstagramCloneLoginPage">
+    tools:context=".ClassicBikeShareLogin">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="112dp"
-        android:layout_height="132dp"
+        android:layout_width="161dp"
+        android:layout_height="152dp"
         android:contentDescription="@string/instagram_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -20,59 +19,70 @@
         app:srcCompat="@mipmap/bike_drawing" />
 
     <EditText
-        android:id="@+id/txtEmailExist"
+        android:id="@+id/newUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:width="264dp"
         android:background="@color/cardview_light_background"
         android:ems="10"
-        android:hint="@string/please_enter_your_login"
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="@string/enter_your_login_email"
         android:importantForAutofill="no"
         android:inputType="textAutoComplete|textEmailAddress"
+        android:minHeight="48dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
         android:textColor="@color/design_default_color_on_secondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/txtPassExist"
+        android:id="@+id/newUserPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
+        android:width="264dp"
         android:background="@color/cardview_light_background"
         android:ems="10"
+        android:gravity="center_horizontal|center_vertical"
         android:hint="@string/please_enter_password"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmailExist"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/newUserEmail" />
 
     <Button
-        android:id="@+id/btnLoginExisting"
+        android:id="@+id/btnSignup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="5dp"
-        android:background="#646768"
-        android:text="@string/login"
+        android:background="#03A9F4"
+        android:text="@string/signup"
         android:textColor="#090909"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassExist" />
+        app:layout_constraintTop_toBottomOf="@+id/newUserPass" />
 
     <Button
-        android:id="@+id/btnSignupReturn"
+        android:id="@+id/btnSwitchToLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:background="#333B3E"
-        android:text="@string/signup_new"
+        android:text="@string/switch_to_login"
         android:textColor="#FFFF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +102,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLoginExisting" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSignup" />
+
+    <EditText
+        android:id="@+id/newUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:width="264dp"
+        android:background="@color/cardview_light_background"
+        android:ems="10"
+
+        android:gravity="center_horizontal|center_vertical"
+        android:hint="Please Create a User Name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newUserPass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

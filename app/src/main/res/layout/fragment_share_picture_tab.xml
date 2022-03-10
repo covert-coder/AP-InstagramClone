@@ -27,7 +27,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="53dp"
         android:ems="10"
-        android:hint="@string/to_share_your_image_first_add_a_description_then_click_on_the_image_above"
+        android:hint="@string/to_share_your_image_first_add_a_description_here_then_click_on_the_image_above"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:textAlignment="center"

@@ -1,10 +1,9 @@
-package com.example.ap_instagramclone;
+package com.example.ClassicBikeShare;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,10 +30,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.Objects;
-
-import javax.security.auth.login.LoginException;
 
 /**
  * A simple {@link Fragment} subclass.

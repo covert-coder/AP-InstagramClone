@@ -1,33 +1,32 @@
-package com.example.ap_instagramclone;
+package com.example.ClassicBikeShare;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.parse.ParseUser;
 
 import java.util.Objects;
 
-public class InstagramCloneMainPage extends AppCompatActivity implements View.OnClickListener {
-    private EditText mPasswordInstag;
-    private EditText mUserNameInstag;
-    private EditText mEmailInstag;
-    private Button mSignUpBtn, mLoginBtn;
+public class ClassicBikeShareMain extends AppCompatActivity implements View.OnClickListener {
+    private EditText mPasswordNew;
+    private EditText mUserNameNew;
+    private EditText mEmailNew;
+    private Button mSignUpBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instagram_clone_main_page);
+        setContentView(R.layout.activity_classicbikeshare_signup);
 
         ParseUser.getCurrentUser();
         ParseUser.logOut();
@@ -39,11 +38,11 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
             transitionToSocialMediaActivity();
         }
         // assign edit texts to variables
-        mUserNameInstag = findViewById(R.id.txtUserInstagram);
-        mEmailInstag = findViewById(R.id.txtEmailInstagram);
-        mPasswordInstag = findViewById(R.id.txtPassInstagram);
-        mSignUpBtn = findViewById(R.id.btnSignupInstagram);
-        mLoginBtn = findViewById(R.id.btnLoginInstagram);
+        mUserNameNew = findViewById(R.id.newUserName);
+        mEmailNew = findViewById(R.id.newUserEmail);
+        mPasswordNew = findViewById(R.id.newUserPass);
+        mSignUpBtn = findViewById(R.id.btnSignup);
+        Button mLoginBtn = findViewById(R.id.btnSwitchToLogin);
 
         // assigning the two buttons to the implemented onClickListener
         mSignUpBtn.setOnClickListener(this);
@@ -52,66 +51,61 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
         // allowing the user to enter their data using the enter key by setting an
         // onKeyListener that looks for the enter key click and press down
         // set to the password field because it is the last one filled by the user (last in sequence on screen)
-        mPasswordInstag.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int keyCode, KeyEvent event) {
-                if(keyCode==KeyEvent.KEYCODE_ENTER && event.getAction()==KeyEvent.ACTION_DOWN){
+        mPasswordNew.setOnKeyListener((view, keyCode, event) -> {
+            if(keyCode==KeyEvent.KEYCODE_ENTER && event.getAction()==KeyEvent.ACTION_DOWN){
 
-                    onClick(mSignUpBtn); // calls the onClick assigned to the signUP button as though it was clicked
-                }
-                return false;
+                onClick(mSignUpBtn); // calls the onClick assigned to the signUP button as though it was clicked
             }
+            return false;
         });
     }
     // onClick implemented by main class
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             // the login button is pressed sending user to the login screen
-            case R.id.btnLoginInstagram:
-                Intent intentLogin = new Intent(InstagramCloneMainPage.this,
-                        InstagramCloneLoginPage.class);
+            case R.id.btnSwitchToLogin:
+                Intent intentLogin = new Intent(ClassicBikeShareMain.this,
+                        ClassicBikeShareLogin.class);
                 startActivity(intentLogin);
                 break;
             // signup button is pressed, sending data to the parse server
             // and generating a progress dialog
             // plus error checking
-            case R.id.btnSignupInstagram:
+            case R.id.btnSignup:
 
                 final ParseUser appUser = new ParseUser();
-                appUser.setUsername(mUserNameInstag.getText().toString());
-                appUser.setPassword(mPasswordInstag.getText().toString());
-                appUser.setEmail(mEmailInstag.getText().toString());
+                appUser.setUsername(mUserNameNew.getText().toString());
+                appUser.setPassword(mPasswordNew.getText().toString());
+                appUser.setEmail(mEmailNew.getText().toString());
 
                 //create a progress dialog to notify the user that their signup is progressing
-                final ProgressDialog signUpDialog = new ProgressDialog(InstagramCloneMainPage.this);
+                final ProgressDialog signUpDialog = new ProgressDialog(ClassicBikeShareMain.this);
                 signUpDialog.setTitle("Working");
-                signUpDialog.setMessage(mUserNameInstag.getText().toString() + " Your signUp is in progress");
+                signUpDialog.setMessage(mUserNameNew.getText().toString() + " Your signUp is in progress");
                 signUpDialog.show();
 
                 // check for an empty field in password, username, email address
-                if (mEmailInstag.getText().toString().equals("") || mPasswordInstag.getText().toString().equals("")
-                        || mPasswordInstag.getText().toString().equals("")) {
-                    Toast.makeText(InstagramCloneMainPage.this, "email address, password, " +
+                if (mEmailNew.getText().toString().equals("") || mPasswordNew.getText().toString().equals("")
+                        || mPasswordNew.getText().toString().equals("")) {
+                    Toast.makeText(ClassicBikeShareMain.this, "email address, password, " +
                             "and username must be provided", Toast.LENGTH_LONG).show();
                     signUpDialog.dismiss(); // signup is not occurring so..
                 }
                 // but.., if all fields have been filled, then
                 else{
-                        appUser.signUpInBackground(new SignUpCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
-                                            "set successfully;", Toast.LENGTH_SHORT).show();
-                                    signUpDialog.dismiss();
-                                    // possibility of server error since e is not null
-                                    transitionToSocialMediaActivity();
-                                } else {
-                                    Toast.makeText(InstagramCloneMainPage.this, "your password and login were " +
-                                            "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
-                                    signUpDialog.dismiss();
-                                }
+                        appUser.signUpInBackground(e -> {
+                            if (e == null) {
+                                Toast.makeText(ClassicBikeShareMain.this, "your password and login were " +
+                                        "set successfully;", Toast.LENGTH_SHORT).show();
+                                signUpDialog.dismiss();
+                                // possibility of server error since e is not null
+                                transitionToSocialMediaActivity();
+                            } else {
+                                Toast.makeText(ClassicBikeShareMain.this, "your password and login were " +
+                                        "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                signUpDialog.dismiss();
                             }
                         });
                         break; // break from case R.id.btnSignupInstag
@@ -136,7 +130,7 @@ public class InstagramCloneMainPage extends AppCompatActivity implements View.On
     }
     // this method, takes us to the social media page when login is complete
     private void transitionToSocialMediaActivity(){
-           Intent intentSocialActivity = new Intent(InstagramCloneMainPage.this, SocialMediaActivity.class);
+           Intent intentSocialActivity = new Intent(ClassicBikeShareMain.this, SocialMediaActivity.class);
            startActivity(intentSocialActivity);
            finish();
     }

@@ -26,12 +26,12 @@
         android:background="#352F2D"
         android:ems="10"
         android:hint="@string/profile_name"
+        android:importantForAutofill="no"
         android:inputType="textLongMessage"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        android:importantForAutofill="no" />
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
     <EditText
         android:id="@+id/edtProfession"
@@ -96,7 +96,7 @@
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
         android:text="@string/profile_named"
-        android:textColor="#0277BD"
+        android:textColor="#311B92"
         app:layout_constraintBottom_toTopOf="@+id/edtProfile2"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
@@ -106,7 +106,7 @@
         android:layout_height="18dp"
         android:layout_marginBottom="16dp"
         android:text="@string/Profession"
-        android:textColor="#0277BD"
+        android:textColor="#311B92"
         app:layout_constraintBottom_toTopOf="@+id/edtProfession"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
@@ -116,19 +116,20 @@
         android:layout_height="18dp"
         android:layout_marginBottom="17dp"
         android:text="@string/bikes_you_own"
-        android:textColor="#0277BD"
+        android:textColor="#311B92"
         app:layout_constraintBottom_toTopOf="@+id/edtHobbies2"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="144dp"
+        android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/bikes_you_are_seeking"
+        android:text="@string/bikes_you_want_to_have"
         android:textColor="#0277BD"
         app:layout_constraintBottom_toTopOf="@+id/edtSports2"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/edtBio2"
@@ -152,7 +153,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/bio"
-        android:textColor="#0277BD"
+        android:textColor="#311B92"
         app:layout_constraintBottom_toTopOf="@+id/edtBio2"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 

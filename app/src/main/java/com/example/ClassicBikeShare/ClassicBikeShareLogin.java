@@ -1,10 +1,9 @@
-package com.example.ap_instagramclone;
+package com.example.ClassicBikeShare;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -18,7 +17,7 @@ import com.parse.ParseUser;
 
 import java.util.Objects;
 
-public class InstagramCloneLoginPage extends AppCompatActivity {
+public class ClassicBikeShareLogin extends AppCompatActivity {
 
     private EditText txtEmailOnfile;
     private EditText txtPassOnfile;
@@ -26,16 +25,16 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instagram_clone_login_page);
+        setContentView(R.layout.activity_classicbikeshare_login);
 
         setTitle("Login to Classic Bike Share");
 
 
-        txtEmailOnfile = findViewById(R.id.txtEmailExist);
-        txtPassOnfile = findViewById(R.id.txtPassExist);
+        txtEmailOnfile = findViewById(R.id.newUserEmail);
+        txtPassOnfile = findViewById(R.id.newUserPass);
 
         // the login button is pushed,
-        findViewById(R.id.btnLoginExisting).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnSignup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // user name, as entered, and password, as entered are sent to parse server for match
@@ -45,11 +44,11 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
                             @Override
                             public void done(ParseUser user, ParseException e) {
                                 if(user!=null && e==null){
-                                    Toast.makeText(InstagramCloneLoginPage.this, "your login was successful "+user.get("username")
+                                    Toast.makeText(ClassicBikeShareLogin.this, "your login was successful "+user.get("username")
                                             , Toast.LENGTH_SHORT).show();
                                 transitionToSocialMediaActivity();
                                 }else{
-                                    Toast.makeText(InstagramCloneLoginPage.this, "your login failed: "+ e.getMessage(),
+                                    Toast.makeText(ClassicBikeShareLogin.this, "your login failed: "+ e.getMessage(),
                                             Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -57,11 +56,11 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btnSignupReturn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnSwitchToLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentSignUp = new Intent(InstagramCloneLoginPage.this,
-                        InstagramCloneMainPage.class);
+                Intent intentSignUp = new Intent(ClassicBikeShareLogin.this,
+                        ClassicBikeShareMain.class);
                 startActivity(intentSignUp);
 
             }
@@ -83,7 +82,7 @@ public class InstagramCloneLoginPage extends AppCompatActivity {
     }
     // this method, takes us to the social media page when signup is complete
     private void transitionToSocialMediaActivity(){
-        Intent intentSocialActivity = new Intent(InstagramCloneLoginPage.this, SocialMediaActivity.class);
+        Intent intentSocialActivity = new Intent(ClassicBikeShareLogin.this, SocialMediaActivity.class);
         startActivity(intentSocialActivity);
         finish();
     }

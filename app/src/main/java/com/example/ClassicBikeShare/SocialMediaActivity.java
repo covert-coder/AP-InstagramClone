@@ -1,4 +1,4 @@
-package com.example.ap_instagramclone;
+package com.example.ClassicBikeShare;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -241,7 +240,7 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
 
         } else if (item.getItemId() == R.id.logout_user_item){
 
-            Intent intent = new Intent(SocialMediaActivity.this, InstagramCloneMainPage.class);
+            Intent intent = new Intent(SocialMediaActivity.this, ClassicBikeShareMain.class);
             startActivity(intent);
             ParseUser.getCurrentUser().logOut();
             finish();

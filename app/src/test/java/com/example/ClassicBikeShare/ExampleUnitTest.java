@@ -1,4 +1,4 @@
-package com.example.ap_instagramclone;
+package com.example.ClassicBikeShare;
 
 import org.junit.Test;
 

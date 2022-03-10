@@ -10,6 +10,6 @@ dependencyResolutionManagement {
 }
 
 include ':app'
-rootProject.name='InstagramClone2'
+rootProject.name='ClassicBikeShare'
 
 

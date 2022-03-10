@@ -25,7 +25,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="4dp"
         android:ems="10"
-        android:hint="@string/to_share_your_image_first_add_a_description_then_click_on_the_image_above"
+        android:hint="@string/to_share_your_image_first_add_a_description_here_then_click_on_the_image_above"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:textAlignment="center"
@@ -64,7 +64,7 @@
     <Button
         android:id="@+id/btnViewYourAlbum"
         android:layout_width="259dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_margin="8dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/holo_orange_light"
