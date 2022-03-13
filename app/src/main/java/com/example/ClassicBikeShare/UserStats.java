@@ -34,7 +34,7 @@ public class UserStats extends AppCompatActivity {
         String receivedUsersName2 = extras.getString("username");
 
         userStats = findViewById(R.id.txtUserStats);
-        btnClose=findViewById(R.id.btnCloseStats);
+        btnClose = findViewById(R.id.btnCloseStats);
         // a close button is coded for the frame layout of this userStats class
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,24 +58,26 @@ public class UserStats extends AppCompatActivity {
         parseQuery.getFirstInBackground(new GetCallback<ParseUser>() {
             @Override
             public void done(ParseUser ourTargetedUser, ParseException e) {
-                if (ourTargetedUser != null && e == null) {
-                    // set the output to the TextView to show the user the stats for this user selected
-                    userStats.setText(getString(R.string.users_name)+ ourTargetedUser.get("username").
-                            toString() + "\n" +"\n" + getString(R.string.bikes_that_you_own)
-+                            ourTargetedUser.get("Hobbies").toString() +
-                            "\n" + "\n" +getString(R.string.bikes_you_want_to_have)+ ourTargetedUser.get
-                            ("FavouriteSports").toString() +
-                            "\n" +"\n" + getString(R.string.profession) + ourTargetedUser.get
-                            ("Profession").toString());
-                }
-                else {
-                    Toast.makeText(UserStats.this, "this user does not have a profile",
-                            Toast.LENGTH_SHORT).show();
+                if (ourTargetedUser.get("profileName") == null || ourTargetedUser.get("Bio") == null || ourTargetedUser.get("Profession") == null || ourTargetedUser.get("FavouriteSports") == null || ourTargetedUser.get("Hobbies") == null)
+                    Toast.makeText(UserStats.this, "this user does not have a  full profile on file",
+                            Toast.LENGTH_LONG).show();
+            else{
+            //final ParseUser ourTargetedUser = ParseUser.getCurrentUser();
+                // if (ourTargetedUser.get("username") != null && e == null) {
+                // set the output to the TextView to show the user the stats for this user selected
 
-                }
+                userStats.setText(getString(R.string.users_name) + ourTargetedUser.get("username").
+                        toString() + "\n" + "\n" + getString(R.string.bikes_that_you_own)
+                        + ourTargetedUser.get("Hobbies").toString() +
+                        "\n" + "\n" + getString(R.string.bikes_you_want_to_have) + ourTargetedUser.get
+                        ("FavouriteSports").toString() +
+                        "\n" + "\n" + getString(R.string.profession) + ourTargetedUser.get
+                        ("Profession").toString());
             }
-        });
+        }
+    });
     }
 }
+
 
 

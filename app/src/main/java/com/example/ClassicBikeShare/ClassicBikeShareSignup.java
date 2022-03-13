@@ -17,7 +17,7 @@ import com.parse.ParseUser;
 
 import java.util.Objects;
 
-public class ClassicBikeShareMain extends AppCompatActivity implements View.OnClickListener {
+public class ClassicBikeShareSignup extends AppCompatActivity implements View.OnClickListener {
     private EditText mPasswordNew;
     private EditText mUserNameNew;
     private EditText mEmailNew;
@@ -66,7 +66,7 @@ public class ClassicBikeShareMain extends AppCompatActivity implements View.OnCl
         switch (view.getId()) {
             // the login button is pressed sending user to the login screen
             case R.id.btnSwitchToLogin:
-                Intent intentLogin = new Intent(ClassicBikeShareMain.this,
+                Intent intentLogin = new Intent(ClassicBikeShareSignup.this,
                         ClassicBikeShareLogin.class);
                 startActivity(intentLogin);
                 break;
@@ -81,7 +81,7 @@ public class ClassicBikeShareMain extends AppCompatActivity implements View.OnCl
                 appUser.setEmail(mEmailNew.getText().toString());
 
                 //create a progress dialog to notify the user that their signup is progressing
-                final ProgressDialog signUpDialog = new ProgressDialog(ClassicBikeShareMain.this);
+                final ProgressDialog signUpDialog = new ProgressDialog(ClassicBikeShareSignup.this);
                 signUpDialog.setTitle("Working");
                 signUpDialog.setMessage(mUserNameNew.getText().toString() + " Your signUp is in progress");
                 signUpDialog.show();
@@ -89,7 +89,7 @@ public class ClassicBikeShareMain extends AppCompatActivity implements View.OnCl
                 // check for an empty field in password, username, email address
                 if (mEmailNew.getText().toString().equals("") || mPasswordNew.getText().toString().equals("")
                         || mPasswordNew.getText().toString().equals("")) {
-                    Toast.makeText(ClassicBikeShareMain.this, "email address, password, " +
+                    Toast.makeText(ClassicBikeShareSignup.this, "email address, password, " +
                             "and username must be provided", Toast.LENGTH_LONG).show();
                     signUpDialog.dismiss(); // signup is not occurring so..
                 }
@@ -97,13 +97,13 @@ public class ClassicBikeShareMain extends AppCompatActivity implements View.OnCl
                 else{
                         appUser.signUpInBackground(e -> {
                             if (e == null) {
-                                Toast.makeText(ClassicBikeShareMain.this, "your password and login were " +
+                                Toast.makeText(ClassicBikeShareSignup.this, "your password and login were " +
                                         "set successfully;", Toast.LENGTH_SHORT).show();
                                 signUpDialog.dismiss();
                                 // possibility of server error since e is not null
                                 transitionToSocialMediaActivity();
                             } else {
-                                Toast.makeText(ClassicBikeShareMain.this, "your password and login were " +
+                                Toast.makeText(ClassicBikeShareSignup.this, "your password and login were " +
                                         "not successful;" + e.getMessage(), Toast.LENGTH_LONG).show();
                                 signUpDialog.dismiss();
                             }
@@ -130,7 +130,7 @@ public class ClassicBikeShareMain extends AppCompatActivity implements View.OnCl
     }
     // this method, takes us to the social media page when login is complete
     private void transitionToSocialMediaActivity(){
-           Intent intentSocialActivity = new Intent(ClassicBikeShareMain.this, SocialMediaActivity.class);
+           Intent intentSocialActivity = new Intent(ClassicBikeShareSignup.this, SocialMediaActivity.class);
            startActivity(intentSocialActivity);
            finish();
     }

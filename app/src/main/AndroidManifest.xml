@@ -19,7 +19,7 @@
             android:parentActivityName=".SocialMediaActivity">
 
         </activity>
-        <activity android:name=".ClassicBikeShareMain">
+        <activity android:name=".ClassicBikeShareSignup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

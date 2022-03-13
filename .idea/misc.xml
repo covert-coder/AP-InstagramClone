@@ -22,11 +22,17 @@
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/activity_classicbikeshare_login.xml" value="0.1398148148148148" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/activity_classicbikeshare_main.xml" value="0.33" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/activity_classicbikeshare_signup.xml" value="0.18" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/fragment_profile_tab.xml" value="0.1398148148148148" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/fragment_share_picture_tab.xml" value="0.1398148148148148" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout-land/fragment_users_tab.xml" value="0.16" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/activity_classicbikeshare_login.xml" value="0.22" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/activity_classicbikeshare_main.xml" value="0.14" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/activity_classicbikeshare_signup.xml" value="0.22" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/activity_users_posts.xml" value="0.16712962962962963" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/fragment_alert_custom.xml" value="0.16712962962962963" />
         <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/fragment_profile_tab.xml" value="0.33" />
+        <entry key="..\:/Users/ross/AndroidStudioProjects/Classic Bike Share/app/src/main/res/layout/fragment_users_tab.xml" value="0.33" />
       </map>
     </option>
   </component>

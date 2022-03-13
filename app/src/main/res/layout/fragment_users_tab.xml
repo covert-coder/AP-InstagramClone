@@ -62,7 +62,7 @@
             android:layout_marginBottom="8dp"
             android:text="@string/hold_a_user_name_for_details"
             android:textAlignment="center"
-            android:textColor="#ffff"
+            android:textColor="#A1887F"
             android:textSize="24sp" />
 
         <ListView

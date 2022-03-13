@@ -60,7 +60,7 @@ public class ClassicBikeShareLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentSignUp = new Intent(ClassicBikeShareLogin.this,
-                        ClassicBikeShareMain.class);
+                        ClassicBikeShareSignup.class);
                 startActivity(intentSignUp);
 
             }

@@ -240,7 +240,7 @@ public class SocialMediaActivity extends AppCompatActivity implements ProfileTab
 
         } else if (item.getItemId() == R.id.logout_user_item){
 
-            Intent intent = new Intent(SocialMediaActivity.this, ClassicBikeShareMain.class);
+            Intent intent = new Intent(SocialMediaActivity.this, ClassicBikeShareSignup.class);
             startActivity(intent);
             ParseUser.getCurrentUser().logOut();
             finish();
